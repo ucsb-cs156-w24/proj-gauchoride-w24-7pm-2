@@ -13,40 +13,40 @@ body {
   }
   
 
-.toggle-admin {
+.toggle-admin.btn.btn-primary {
    background-color: #5e92c9;
    border-color: #007bff;
    color: white;
 }
 
-.toggle-admin:hover {
+.toggle-admin.btn.btn-primary:hover {
    background-color: #527faf;
    border-color: #007bff;
    color: white;
 }
 
-.toggle-driver {
+.toggle-driver.btn.btn-primary {
    background-color: #59bf71;
    border-color: #28a745;
    color: white;
 }
 
-.toggle-driver:hover {
+.toggle-driver.btn.btn-primary:hover {
    background-color: #469158;
    border-color: #28a745;
    color: white;
 }
 
-.toggle-rider {
+.toggle-rider.btn.btn-primary {
    background-color: #aa5ec3;
    border-color:#b235dc;
    color: white;
 }
 
-.toggle-rider:hover {
+.toggle-rider.btn.btn-primary:hover {
    background-color: #814894;
    border-color: #b235dc;
    color: white;
 }
 
-/*# sourceMappingURL=main.ea1af968.css.map*/
+/*# sourceMappingURL=main.adb3ee59.css.map*/
