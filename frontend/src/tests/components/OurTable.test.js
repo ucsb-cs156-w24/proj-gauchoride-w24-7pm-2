@@ -1,6 +1,5 @@
 import { render, waitFor, fireEvent } from "@testing-library/react";
 import OurTable, {ButtonColumn} from "main/components/OurTable";
-import { QueryClient, QueryClientProvider } from "react-query";
 
 describe("OurTable tests", () => {
 
@@ -35,12 +34,9 @@ describe("OurTable tests", () => {
         ButtonColumn("Click", "primary", clickMeCallback, "testId", "Click Here"),
     ];
 
-    const expectedHeaders = ["Column 1", "Column 2", "Click Here"];
-    const expectedFields = ["col1", "col2", "Click"];
-
     // testid-header 
     test("renders headers correctly", async () => {
-        const { getByTestId, getAllByText } = render(
+        const { getByTestId } = render(
             <OurTable columns={columns} data={threeRows} testid={"sampleTestId"} />
         );
 
