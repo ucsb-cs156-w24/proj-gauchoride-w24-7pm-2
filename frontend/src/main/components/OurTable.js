@@ -84,9 +84,9 @@ export default function OurTable({ columns, data, testid = "testid" }) {
 //   ButtonColumn("Delete", "danger", deleteCallback)
 // ];
 
-export function ButtonColumn(label, variant, callback, testid) {
+export function ButtonColumn(label, variant, callback, testid, displayText) {
   const column = {
-    Header: label.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+    Header: displayText || label,
     id: label,
     Cell: ({ cell }) => (
       <Button
@@ -95,7 +95,7 @@ export function ButtonColumn(label, variant, callback, testid) {
         data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
         className={cell.column.id} 
       >
-        {label.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+        {displayText}
       </Button>
     )
   }

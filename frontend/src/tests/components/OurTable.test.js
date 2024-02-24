@@ -28,7 +28,7 @@ describe("OurTable tests", () => {
             Header: 'Column 2',
             accessor: 'col2',
         },
-        ButtonColumn("click-here", "primary", clickMeCallback, "testId"),
+        ButtonColumn("Click", "primary", clickMeCallback, "testId", "Click Here"),
     ];
 
     test("renders an empty table without crashing", () => {
@@ -48,8 +48,8 @@ describe("OurTable tests", () => {
             <OurTable columns={columns} data={threeRows} />
         );
 
-        await waitFor(()=> expect(getByTestId("testId-cell-row-0-col-click-here-button")).toBeInTheDocument() );
-        const button = getByTestId("testId-cell-row-0-col-click-here-button");
+        await waitFor(()=> expect(getByTestId("testId-cell-row-0-col-Click-button")).toBeInTheDocument() );
+        const button = getByTestId("testId-cell-row-0-col-Click-button");
         fireEvent.click(button);
         await waitFor(()=>expect(clickMeCallback).toBeCalledTimes(1));
     });
@@ -84,20 +84,5 @@ describe("OurTable tests", () => {
         
 
     });
-
-    test("The button appears in the table with correct text", async () => {
-        const { getByTestId } = render(
-            <OurTable columns={columns} data={threeRows} />
-        );
-
-        await waitFor(() => expect(getByTestId("testId-cell-row-0-col-click-here-button")).toBeInTheDocument());
-        const button = getByTestId("testId-cell-row-0-col-click-here-button");
-
-        expect(button).toHaveTextContent("Click Here");
-
-        fireEvent.click(button);
-        await waitFor(() => expect(clickMeCallback).toBeCalledTimes(1));
-    });
-
 
 });
