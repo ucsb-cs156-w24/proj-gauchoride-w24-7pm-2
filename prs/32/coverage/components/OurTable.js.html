@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -178,15 +178,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">181x</span>
+<span class="cline-any cline-yes">237x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">181x</span>
+<span class="cline-any cline-yes">237x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">181x</span>
+<span class="cline-any cline-yes">237x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1711x</span>
+<span class="cline-any cline-yes">2110x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,11 +205,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">372x</span>
-<span class="cline-any cline-yes">372x</span>
+<span class="cline-any cline-yes">447x</span>
+<span class="cline-any cline-yes">447x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3405x</span>
+<span class="cline-any cline-yes">3960x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -252,21 +252,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">292x</span>
-<span class="cline-any cline-yes">368x</span>
+<span class="cline-any cline-yes">338x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">672x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">729x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">999x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">292x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">338x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
 import { useTable, useSortBy } from 'react-table'
 import { Table, Button } from "react-bootstrap";
@@ -353,9 +353,9 @@ export default function OurTable({ columns, data, testid = "testid" }) {
 //   ButtonColumn("Delete", "danger", deleteCallback)
 // ];
 &nbsp;
-export function ButtonColumn(label, variant, callback, testid) {
+export function ButtonColumn(label, variant, callback, testid, displayText) {
   const column = {
-    Header: label.replace(/-/g, ' ').split(' ').map(word =&gt; word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+    Header: displayText || label,
     id: label,
     Cell: ({ cell }) =&gt; (
       &lt;Button
@@ -364,7 +364,7 @@ export function ButtonColumn(label, variant, callback, testid) {
         data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
         className={cell.column.id} 
       &gt;
-        {label.replace(/-/g, ' ').split(' ').map(word =&gt; word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+        {displayText}
       &lt;/Button&gt;
     )
   }
@@ -376,7 +376,7 @@ export function ButtonColumn(label, variant, callback, testid) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat Feb 24 2024 13:37:06 GMT-0800 (Pacific Standard Time)
+                at Sat Feb 24 2024 14:23:06 GMT-0800 (Pacific Standard Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
