@@ -85,6 +85,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
           }
 
+          if (getRider(email)) {
+            mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_RIDER"));
+          }
 
           if (getDriver(email)) {
             mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_DRIVER"));
@@ -112,6 +115,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public boolean getDriver(String email){
     Optional<User> u = userRepository.findByEmail(email);
     return u.isPresent() && u.get().getDriver();
+  }
+
+  public boolean getRider(String email){
+    Optional<User> u = userRepository.findByEmail(email);
+    return u.isPresent() && u.get().getRider();
   }
   
 }

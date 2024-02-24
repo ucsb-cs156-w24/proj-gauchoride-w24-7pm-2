@@ -15,6 +15,7 @@ import ShiftCreatePage from "main/pages/Shift/ShiftCreatePage";
 import ShiftEditPage from "main/pages/Shift/ShiftEditPage";
 import ShiftIndexPage from "main/pages/Shift/ShiftIndexPage";
 import DriverPage from "main/pages/DriverPage";
+import RiderPage from "main/pages/RiderPage"
 
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
@@ -68,6 +69,9 @@ function App() {
         }
         { 
           hasRole(currentUser, "ROLE_DRIVER") && <Route exact path="/drivers" element={<DriverList />} />
+        }
+        { 
+          hasRole(currentUser, "ROLE_USER") && <Route exact path="/rider" element={<RiderPage />} />
         }
         <Route exact path="/privacy.html"  />
         <Route exact path="/*" element={<PageNotFound />} />
