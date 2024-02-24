@@ -5,8 +5,20 @@
    color: white;
 }
 
+.toggle-admin:hover {
+   background-color: #527faf;
+   border-color: #007bff;
+   color: white;
+}
+
 .toggle-driver {
    background-color: #59bf71;
+   border-color: #28a745;
+   color: white;
+}
+
+.toggle-driver:hover {
+   background-color: #469158;
    border-color: #28a745;
    color: white;
 }
@@ -14,5 +26,11 @@
 .toggle-rider {
    background-color: #aa5ec3;
    border-color:#b235dc;
+   color: white;
+}
+
+.toggle-rider:hover {
+   background-color: #814894;
+   border-color: #b235dc;
    color: white;
 }
