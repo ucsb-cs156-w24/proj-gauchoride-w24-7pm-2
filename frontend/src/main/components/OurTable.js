@@ -2,6 +2,7 @@ import React from "react";
 import { useTable, useSortBy } from 'react-table'
 import { Table, Button } from "react-bootstrap";
 import './OurTable.css'
+
 export default function OurTable({ columns, data, testid = "testid" }) {
 
   const {
@@ -85,16 +86,16 @@ export default function OurTable({ columns, data, testid = "testid" }) {
 
 export function ButtonColumn(label, variant, callback, testid) {
   const column = {
-    Header: label,
+    Header: label.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
     id: label,
     Cell: ({ cell }) => (
       <Button
         variant={variant}
         onClick={() => callback(cell)}
         data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
-        className={cell.column.id.replace(/\s+/g, '-')} 
+        className={cell.column.id} 
       >
-        {label}
+        {label.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
       </Button>
     )
   }

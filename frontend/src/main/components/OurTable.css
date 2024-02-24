@@ -1,17 +1,17 @@
 
-.Toggle-Admin {
+.toggle-admin {
    background-color: #5e92c9;
    border-color: #007bff;
    color: white;
 }
 
-.Toggle-Driver {
+.toggle-driver {
    background-color: #59bf71;
    border-color: #28a745;
    color: white;
 }
 
-.Toggle-Rider {
+.toggle-rider {
    background-color: #aa5ec3;
    border-color:#b235dc;
    color: white;
