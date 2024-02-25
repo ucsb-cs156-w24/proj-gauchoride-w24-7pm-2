@@ -84,7 +84,8 @@ function App() {
         {
           (hasRole(currentUser, "ROLE_DRIVER") ) && <Route exact path="/drivershifts" element={<DriverDashboardPage />} />
         }
-          (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/apply/rider" element={<RiderApplicationIndexPageMember />} />
+        {
+          (hasRole(currentUser, "ROLE_MEMBER") ) && <Route exact path="/apply/rider" element={<RiderApplicationIndexPageMember />} />
         }
         {
           (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/apply/rider/new" element={<RiderApplicationCreatePage />} />
