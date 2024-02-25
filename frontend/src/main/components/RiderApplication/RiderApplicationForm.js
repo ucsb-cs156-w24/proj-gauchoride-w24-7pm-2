@@ -39,20 +39,6 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
 
             {initialContents && (
                 <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="userId">Applicant Id</Form.Label>
-                    <Form.Control
-                        data-testid={testIdPrefix + "-userId"}
-                        id="userId"
-                        type="text"
-                        {...register("userId")}
-                        defaultValue={initialContents?.userId}
-                        disabled
-                    />
-                </Form.Group>
-            )}
-
-            {initialContents && (
-                <Form.Group className="mb-3" >
                     <Form.Label htmlFor="status">Status</Form.Label>
                     <Form.Control
                         data-testid={testIdPrefix + "-status"}
