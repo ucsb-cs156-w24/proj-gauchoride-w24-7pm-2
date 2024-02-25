@@ -29,7 +29,7 @@ export default function RiderApplicationIndexPage() {
       useBackend(
             // Stryker disable all : hard to test for query caching
             ["/api/rider"],
-            { method: "GET", url: "/api/rider" },
+            { method: "GET", url: "/api/rider/admin/all" },
             []
             // Stryker restore all 
    );  
