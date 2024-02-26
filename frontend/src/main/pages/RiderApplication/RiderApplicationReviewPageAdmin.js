@@ -12,18 +12,18 @@ export default function RiderApplicationEditPage() {
    const { data: riderApplication, _error, _status } =
       useBackend(
          // Stryker disable next-line all : don't test internal caching of React Query
-         [`/api/riderApplication?id=${id}`],
+         [`/api/rider/admin?id=${id}`],
          {  // Stryker disable next-line all : GET is the default, so changing this to "" doesn't introduce a bug
             method: "GET",
-            url: `/api/riderApplication`,
+            url: `/api/rider/admin`,
             params: {
                id
             }
          }
       );
 
-   const objectToAxiosPutParamsAdmin = (riderApplication) => ({
-      url: "/api/riderApplication",
+   const objectToAxiosPutParams = (riderApplication) => ({
+      url: "/api/rider/admin",
       method: "PUT",
       params: {
          id: riderApplication.id,
@@ -38,17 +38,17 @@ export default function RiderApplicationEditPage() {
       toast(`Application Updated - id: ${riderApplication.id}`);
    }
 
-   const mutationAdmin = useBackendMutation(
-      objectToAxiosPutParamsAdmin,
+   const mutation = useBackendMutation(
+      objectToAxiosPutParams,
       { onSuccess },
       // Stryker disable next-line all : hard to set up test for caching
       [`/api/rider/admin?id=${id}`]
    );
 
-   const { isSuccess } = mutationAdmin 
+   const { isSuccess } = mutation
 
    const onSubmit = async (data) => {
-      mutationAdmin.mutate(data)
+      mutation.mutate(data)
    }
 
    if (isSuccess) {
