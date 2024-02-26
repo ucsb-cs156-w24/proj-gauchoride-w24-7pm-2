@@ -42,7 +42,7 @@ describe("RiderApplicationReviewPage tests", () => {
       beforeEach(() => {
          axiosMock.reset();
          axiosMock.resetHistory();
-         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.memberOnly);
+         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
          axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
          axiosMock.onGet("/api/riderApplication", { params: { id: 17 } }).timeout();
       });
@@ -72,7 +72,7 @@ describe("RiderApplicationReviewPage tests", () => {
       beforeEach(() => {
          axiosMock.reset();
          axiosMock.resetHistory();
-         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
+         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
          axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
          axiosMock.onGet("/api/riderApplication", { params: { id: 17 } }).reply(200, {
             id: 17,
