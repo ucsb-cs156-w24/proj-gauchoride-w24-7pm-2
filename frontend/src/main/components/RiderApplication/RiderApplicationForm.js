@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
+import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Apply", email}) {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
     // Stryker enable all
    
     const testIdPrefix = "RiderApplicationForm";
-
+    const { data: currentUser } = useCurrentUser();
 
     return (
 
@@ -119,20 +120,22 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                 </Form.Group>
             )}
 
-            {initialContents && (
-                <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="notes">Notes</Form.Label>
-                    <Form.Control
-                        data-testid={testIdPrefix + "-notes"}
-                        id="notes"
-                        type="text"
-                        {...register("notes")}
-                        defaultValue={initialContents?.notes}
-                        disabled
-                    />
-                </Form.Group>
-            )}
-
+            <Form.Group className="mb-3">
+                <Form.Label htmlFor="notes">Notes</Form.Label>
+                <Form.Control
+                    data-testid={testIdPrefix + "-notes"}
+                    id="notes"
+                    type="text"
+                    isInvalid={Boolean(errors.notes)}
+                    placeholder="e.g. approved"
+                    defaultValue={initialContents?.notes}
+                    disabled={!hasRole(currentUser, "ROLE_ADMIN")}
+                />
+                <Form.Control.Feedback type="invalid">
+                    {errors.notes?.message}
+                </Form.Control.Feedback>
+            </Form.Group>
+        
             <Form.Group className="mb-3">
                 <Form.Label htmlFor="perm_number">Perm Number</Form.Label>
                 <Form.Control
