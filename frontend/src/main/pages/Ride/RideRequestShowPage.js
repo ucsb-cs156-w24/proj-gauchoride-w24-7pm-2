@@ -68,7 +68,7 @@ export default function RideRequestEditPage() {
             <div className="pt-2">
                 <h1>Edit Ride Request</h1>
                 {ride &&
-                <RideForm initialContents={ride} submitAction={onSubmit} buttonLabel="Update" showBool = {false} />
+                <RideForm initialContents={ride} submitAction={onSubmit} buttonLabel="Update" />
                 }
             </div>
         </BasicLayout>
