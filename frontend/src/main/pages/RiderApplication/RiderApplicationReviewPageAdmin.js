@@ -3,14 +3,11 @@ import { useParams } from "react-router-dom";
 import RiderApplicationForm from "main/components/RiderApplication/RiderApplicationForm";
 import { Navigate } from 'react-router-dom'
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
-import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import { toast } from "react-toastify";
 
 export default function RiderApplicationEditPage() {
    let { id } = useParams();
-
-   const { data: currentUser } = useCurrentUser();
 
    const { data: riderApplication, _error, _status } =
       useBackend(
@@ -51,7 +48,7 @@ export default function RiderApplicationEditPage() {
    const { isSuccess } = mutationAdmin 
 
    const onSubmit = async (data) => {
-      mutation.mutateAdmin(data)
+      mutationAdmin.mutate(data)
    }
 
    if (isSuccess) {
