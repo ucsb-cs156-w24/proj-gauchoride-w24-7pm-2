@@ -55,13 +55,13 @@ export default function RiderApplicationEditPage() {
    }
 
    if (isSuccess) {
-      return <Navigate to="/apply/rider" />
+      return <Navigate to="/admin/applications/riders" />
    }
 
    return (
       <BasicLayout>
          <div className="pt-2">
-            <h1>Edit Rider Application</h1>
+            <h1>Review Rider Application</h1>
             {riderApplication &&
                <RiderApplicationForm initialContents={riderApplication} submitAction={onSubmit} buttonLabel="Edit" />
             }
