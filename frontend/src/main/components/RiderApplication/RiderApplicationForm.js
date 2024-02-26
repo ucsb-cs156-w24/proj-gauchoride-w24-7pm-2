@@ -16,7 +16,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
         { defaultValues: initialContents }
     );
     // Stryker enable all
-   
+    
     const testIdPrefix = "RiderApplicationForm";
     const { data: currentUser } = useCurrentUser();
 
@@ -38,33 +38,29 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                 </Form.Group>
             )}
 
-            {initialContents && (
-                <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="userId">Applicant Id</Form.Label>
-                    <Form.Control
-                        data-testid={testIdPrefix + "-userId"}
-                        id="userId"
-                        type="text"
-                        {...register("userId")}
-                        defaultValue={initialContents?.userId}
-                        disabled
-                    />
-                </Form.Group>
-            )}
+            <Form.Group className="mb-3">
+                <Form.Label htmlFor="status">Status</Form.Label>
+                <Form.Control
+                    as="select"
+                    data-testid={testIdPrefix + "-status"}
+                    id="status"
+                    isInvalid={Boolean(errors.status)}
+                    {...register("status", { required: "Status is required." })}
+                    defaultValue={initialContents?.status}
+                    disabled={!hasRole(currentUser, "ROLE_ADMIN")}
+                >
+                    <option value="">Select Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="declined">Declined</option>
+                    <option value="expired">Expired</option>
+                    <option value="cancelled">Cancelled</option>
+                </Form.Control>
+                <Form.Control.Feedback type="invalid">
+                    {errors.status?.message}
+                </Form.Control.Feedback>
+            </Form.Group>
 
-            {initialContents && (
-                <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="status">Status</Form.Label>
-                    <Form.Control
-                        data-testid={testIdPrefix + "-status"}
-                        id="status"
-                        type="text"
-                        {...register("status")}
-                        defaultValue={initialContents?.status}
-                        disabled
-                    />
-                </Form.Group>
-            )}
 
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="email">Email</Form.Label>

@@ -22,17 +22,27 @@ export default function RiderApplicationEditPage() {
          }
       );
 
-   const objectToAxiosPutParams = (riderApplication) => ({
-      url: "/api/rider/admin",
-      method: "PUT",
-      params: {
-         id: riderApplication.id,
-      },
-      data: {
+   const objectToAxiosPutParams = (riderApplication) => {
+      // Log the data property to the console
+      console.log('Data being sent:', {
          status: riderApplication.status,
-         notes: riderApplication.notes
-      }
-   });
+         notes: riderApplication.notes,
+         id: riderApplication.id
+      });
+
+      return {
+         url: "/api/rider/admin",
+         method: "PUT",
+         params: {
+            id: riderApplication.id,
+         },
+         data: {
+            status: riderApplication.status,
+            notes: riderApplication.notes
+         }
+      };
+   };
+
 
    const onSuccess = (riderApplication) => {
       toast(`Application Updated - id: ${riderApplication.id}`);
