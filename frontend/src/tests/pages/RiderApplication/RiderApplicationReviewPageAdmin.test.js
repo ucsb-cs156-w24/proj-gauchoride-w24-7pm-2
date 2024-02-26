@@ -44,7 +44,7 @@ describe("RiderApplicationReviewPage tests", () => {
          axiosMock.resetHistory();
          axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
          axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-         axiosMock.onGet("/api/riderApplication", { params: { id: 17 } }).timeout();
+         axiosMock.onGet("/api/rider/admin", { params: { id: 17 } }).timeout();
       });
 
       const queryClient = new QueryClient();
@@ -74,7 +74,7 @@ describe("RiderApplicationReviewPage tests", () => {
          axiosMock.resetHistory();
          axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
          axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-         axiosMock.onGet("/api/riderApplication", { params: { id: 17 } }).reply(200, {
+         axiosMock.onGet("/api/rider/admin", { params: { id: 17 } }).reply(200, {
             id: 17,
             perm_number: "1234567",
             status: "pending",
@@ -85,7 +85,7 @@ describe("RiderApplicationReviewPage tests", () => {
             description: "",
             notes: ""
          });
-         axiosMock.onPut('/api/riderApplication').reply(200, {
+         axiosMock.onPut('/api/rider/admin').reply(200, {
             id: 17,
             perm_number: "7654321",
             status: "pending",
