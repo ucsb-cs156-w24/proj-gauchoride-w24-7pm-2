@@ -9,7 +9,7 @@ import edu.ucsb.cs156.gauchoride.entities.DriverAvailability;
 
 @Repository
 public interface DriverAvailabilityRepository extends CrudRepository<DriverAvailability, Long> {
-    Iterable<DriverAvailability> findAllByRiderId(String driverId);
+    Iterable<DriverAvailability> findAllByDriverId(String driverId);
 
-    Optional<DriverAvailability> findByIdAndRiderId(long id, String driverId);
+    Optional<DriverAvailability> findByIdAndDriverId(long id, String driverId);
 }
