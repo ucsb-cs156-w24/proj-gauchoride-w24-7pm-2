@@ -681,5 +681,23 @@ describe("AppNavbar tests", () => {
         expect(applyMenu).not.toBeInTheDocument();      
     });
 
+    test("Apply to be a Rider should only appear for a user that is not a rider and is a member", async () => {
+        const currentUser = currentUserFixtures.riderMember;
+        const doLogin = jest.fn();
+
+        const { getByText } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
+        const applyMenu = screen.queryByText("Apply to be a Rider");
+        expect(applyMenu).not.toBeInTheDocument();
+    });
+
+
 });
 
