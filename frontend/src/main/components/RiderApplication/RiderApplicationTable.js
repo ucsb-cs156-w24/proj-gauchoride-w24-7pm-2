@@ -108,8 +108,11 @@ export default function RiderApplicationTable({
 
     ];
 
-    const columnsToDisplay = (hasRole(currentUser, "ROLE_ADMIN")) ? buttonColumnsAdmin : buttonColumnsMember;
+    console.log("Current user roles:", currentUser?.roles);
+    console.log("Is Admin:", hasRole(currentUser, "ROLE_ADMIN"));
 
+    const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? buttonColumnsAdmin : buttonColumnsMember ;
+    
     return <OurTable
         data={riderApplications}
         columns={columnsToDisplay}
