@@ -634,7 +634,9 @@ describe("AppNavbar tests", () => {
 
         await waitFor(() => expect(getByText("Welcome, Phill Conrad")).toBeInTheDocument());
         const chatMenu = getByTestId("appnavbar-chat-dropdown");
-        expect(chatMenu).toBeInTheDocument();        
+        expect(chatMenu).toBeInTheDocument();    
+        const applyMenu = screen.queryByText("Apply to be a Rider");
+        expect(applyMenu).toBeInTheDocument();      
     });
 
 
@@ -653,7 +655,9 @@ describe("AppNavbar tests", () => {
 
         await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
         const chatMenu = screen.queryByTestId("appnavbar-chat-dropdown");
-        expect(chatMenu).not.toBeInTheDocument();        
+        expect(chatMenu).not.toBeInTheDocument();  
+        const applyRiderMenu = screen.queryByText("Apply to be a Rider");
+        expect(applyRiderMenu).not.toBeInTheDocument();        
     });
 
     test("Driver page link should not appear for a user that is not a participant", async () => {
