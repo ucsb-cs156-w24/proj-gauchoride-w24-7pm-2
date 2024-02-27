@@ -1,8 +1,12 @@
 
 import OurTable, { ButtonColumn } from "main/components/OurTable"
 import { useBackendMutation } from "main/utils/useBackend";
+import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 export default function UsersTable({ users}) {
+
+    const { data: currentUser } = useCurrentUser();
+
     function cellToAxiosParamsToggleRider(cell) {
         return {
             url: "/api/admin/users/toggleRider",
@@ -12,6 +16,7 @@ export default function UsersTable({ users}) {
             }
         }
     }
+
     // Stryker disable all : hard to test for query caching
     const toggleRiderMutation = useBackendMutation(
         cellToAxiosParamsToggleRider,
@@ -21,7 +26,10 @@ export default function UsersTable({ users}) {
     // Stryker enable all 
 
      // Stryker disable next-line all : TODO try to make a good test for this
-    const toggleRiderCallback = async (cell) => { toggleRiderMutation.mutate(cell); }
+    const toggleRiderCallback = async (cell) => { 
+        toggleRiderMutation.mutate(cell); 
+        console.log("ROLE_RIDER: ", hasRole(currentUser, "ROLE_RIDER"));
+    }
 
     //toggleAdmin
     function cellToAxiosParamsToggleAdmin(cell) {
@@ -66,7 +74,10 @@ export default function UsersTable({ users}) {
     // Stryker enable all 
 
     // Stryker disable next-line all : TODO try to make a good test for this
-    const toggleDriverCallback = async (cell) => { toggleDriverMutation.mutate(cell); }
+    const toggleDriverCallback = async (cell) => { 
+        toggleDriverMutation.mutate(cell); 
+        console.log("ROLE_DRIVER: ", hasRole(currentUser, "ROLE_DRIVER"));
+    }
 
 
     const columns = [

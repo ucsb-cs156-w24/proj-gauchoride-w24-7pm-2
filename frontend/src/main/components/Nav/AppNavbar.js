@@ -119,9 +119,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   <Nav.Link as={Link} to="/apply/rider">Apply to be a Rider</Nav.Link>
                 )
               }
-
             </Nav>
-
             <Nav className="ml-auto">
               {/* This `nav` component contains all navigation items that show up on the right side */}
               {
