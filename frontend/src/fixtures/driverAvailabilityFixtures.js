@@ -3,7 +3,7 @@ const driverAvailabilityFixtures = {
     [
       {
         "id": 1,
-        "driverId": "driver1",
+        "driverId": 1,
         "day": "Monday",
         "start": "3:30PM",
         "end": "4:45PM",
@@ -14,7 +14,7 @@ const driverAvailabilityFixtures = {
     [
         {
             "id": 2,
-            "driverId": "Chris",
+            "driverId": 2,
             "day": "Tuesday",
             "start": "5:00PM",
             "end": "5:50PM",
@@ -23,7 +23,7 @@ const driverAvailabilityFixtures = {
 
         {
             "id": 3,
-            "driverId": "Chris",
+            "driverId": 3,
             "day": "Wednesday",
             "start": "11:00AM",
             "end": "11:15AM",
@@ -32,7 +32,7 @@ const driverAvailabilityFixtures = {
 
         {
             "id": 4,
-            "driverId": "Chris",
+            "driverId": 4,
             "day": "Thursday",
             "start": "4:15PM",
             "end": "5:30PM",

@@ -20,7 +20,7 @@ public class DriverAvailability {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String driverId;
+    private long driverId;
 
     @Schema(allowableValues = "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday")
     private String day;
