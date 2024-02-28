@@ -2,8 +2,10 @@ import React from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
+// import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
-function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Apply", email}) {
+
+function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Apply", email, disableBool}) {
     const navigate = useNavigate();
     
     // Stryker disable all
@@ -32,7 +34,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("id")}
                         defaultValue={initialContents?.id}
-                        disabled
+                        disabled={disableBool}
                     />
                 </Form.Group>
             )}
@@ -46,7 +48,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("userId")}
                         defaultValue={initialContents?.userId}
-                        disabled
+                        disabled={disableBool}
                     />
                 </Form.Group>
             )}
@@ -60,7 +62,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("status")}
                         defaultValue={initialContents?.status}
-                        disabled
+                        disabled={disableBool}
                     />
                 </Form.Group>
             )}
@@ -73,7 +75,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                     type="text"
                     {...register("email")}
                     defaultValue={email}
-                    disabled
+                    disabled={disableBool}
                 />
             </Form.Group>
 
@@ -86,7 +88,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("created_date")}
                         defaultValue={initialContents?.created_date}
-                        disabled
+                        disabled={disableBool}
                     />
                 </Form.Group>
             )}
@@ -100,7 +102,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("updated_date")}
                         defaultValue={initialContents?.updated_date}
-                        disabled
+                        disabled={disableBool}
                     />
                 </Form.Group>
             )}
@@ -114,7 +116,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("cancelled_date")}
                         defaultValue={initialContents?.cancelled_date}
-                        disabled
+                        disabled={disableBool}
                     />
                 </Form.Group>
             )}
@@ -128,7 +130,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("notes")}
                         defaultValue={initialContents?.notes}
-                        disabled
+                        disabled={disableBool}
                     />
                 </Form.Group>
             )}
@@ -153,6 +155,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                     })}
                     placeholder="e.g. 0000000"
                     defaultValue={initialContents?.perm_number}
+                    disabled={disableBool}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.perm_number?.message}
@@ -173,6 +176,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                     placeholder="e.g. My legs are broken."  
                     defaultValue={initialContents?.description}
                     style={{ width: '100%', minHeight: '10rem', resize: 'vertical', verticalAlign: 'top' }}
+                disabled={disableBool}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.description?.message}

@@ -6,7 +6,7 @@ import { useBackend, useBackendMutation } from "main/utils/useBackend";
 
 import { toast } from "react-toastify";
 
-export default function RiderApplicationEditPage() {
+export default function RiderApplicationShowPage() {
   let { id } = useParams();
 
   const { data: riderApplication, _error, _status } =
@@ -59,9 +59,9 @@ export default function RiderApplicationEditPage() {
     return (
         <BasicLayout>
             <div className="pt-2">
-                <h1>Edit Rider Application</h1>
+                <h1>Show Rider Application</h1>
                 {riderApplication &&
-                <RiderApplicationForm initialContents={riderApplication} submitAction={onSubmit} buttonLabel="Edit" disableBool={false} />
+                <RiderApplicationForm initialContents={riderApplication} submitAction={onSubmit} buttonLabel="show" disableBool={true} />
                 }
             </div>
         </BasicLayout>
