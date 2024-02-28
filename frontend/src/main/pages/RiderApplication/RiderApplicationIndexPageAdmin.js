@@ -9,8 +9,7 @@ import RiderApplicationTable from "main/components/RiderApplication/RiderApplica
 
 export default function RiderApplicationIndexPage() {
 
-   const { data: currentUser } = useCurrentUser();
-
+   const currentUser = useCurrentUser();
     // Stryker disable all
    const currentUserCopy = currentUser.data?.root?.rolesList
       ? {
@@ -19,7 +18,7 @@ export default function RiderApplicationIndexPage() {
                ...currentUser.data,
                root: {
                   ...currentUser.data.root,
-                  rolesList: currentUser.data.root.rolesList.filter(role => role !== "ROLE_ADMIN")
+                  rolesList: currentUser.data.root.rolesList
                }
          }
       }
