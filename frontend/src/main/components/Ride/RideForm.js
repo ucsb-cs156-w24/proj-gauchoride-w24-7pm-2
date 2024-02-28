@@ -72,7 +72,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                     type="text"
                     isInvalid={Boolean(errors.start)}
                     {...register("start", {
-                        required: "Pick Up time is required.",
+                        required: "Start time is required.",
                         pattern: {
                             value: /^(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)$/,
                             message: "Please enter time in the format HH:MM AM/PM (e.g., 3:30PM)."
@@ -95,7 +95,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                     type="text"
                     isInvalid={Boolean(errors.start) }
                     {...register("end", {
-                        required: "Drop Off time is required.",
+                        required: "End time is required.",
                         pattern: {
                             value: /^(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)$/,
                             message: "Please enter time in the format HH:MM AM/PM (e.g., 3:30PM)."
