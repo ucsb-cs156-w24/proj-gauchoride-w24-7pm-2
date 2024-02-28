@@ -105,9 +105,9 @@ export default function UsersTable({ users}) {
 
     const buttonColumn = [
         ...columns,
-        ButtonColumn("toggle-admin", "primary", toggleAdminCallback, "UsersTable"),
-        ButtonColumn("toggle-driver", "primary", toggleDriverCallback, "UsersTable"),
-        ButtonColumn("toggle-rider", "primary", toggleRiderCallback, "UsersTable")
+        ButtonColumn("toggle-admin", "primary", toggleAdminCallback, "UsersTable", "Toggle Admin"),
+        ButtonColumn("toggle-driver", "primary", toggleDriverCallback, "UsersTable", "Toggle Driver"),
+        ButtonColumn("toggle-rider", "primary", toggleRiderCallback, "UsersTable", "Toggle Rider")
     ]
 
     //const columnsToDisplay = showButtons ? buttonColumn : columns;

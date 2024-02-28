@@ -1,0 +1,36 @@
+
+.toggle-admin.btn.btn-primary {
+   background-color: #5e92c9;
+   border-color: #007bff;
+   color: white;
+}
+
+.toggle-admin.btn.btn-primary:hover {
+   background-color: #527faf;
+   border-color: #007bff;
+   color: white;
+}
+
+.toggle-driver.btn.btn-primary {
+   background-color: #59bf71;
+   border-color: #28a745;
+   color: white;
+}
+
+.toggle-driver.btn.btn-primary:hover {
+   background-color: #469158;
+   border-color: #28a745;
+   color: white;
+}
+
+.toggle-rider.btn.btn-primary {
+   background-color: #aa5ec3;
+   border-color:#b235dc;
+   color: white;
+}
+
+.toggle-rider.btn.btn-primary:hover {
+   background-color: #814894;
+   border-color: #b235dc;
+   color: white;
+}
