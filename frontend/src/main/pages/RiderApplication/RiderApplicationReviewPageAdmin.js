@@ -35,6 +35,8 @@ export default function RiderApplicationEditPage() {
          method: "PUT",
          params: {
             id: riderApplication.id,
+            status: riderApplication.status,
+            notes: riderApplication.notes
          },
          data: {
             status: riderApplication.status,

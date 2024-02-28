@@ -123,9 +123,9 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                     id="notes"
                     type="text"
                     isInvalid={Boolean(errors.notes)}
-                    placeholder="e.g. approved"
+                    {...register("notes")}
+                    placeholder="e.g. need forms"
                     defaultValue={initialContents?.notes}
-                    disabled={!hasRole(currentUser, "ROLE_ADMIN")}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.notes?.message}
