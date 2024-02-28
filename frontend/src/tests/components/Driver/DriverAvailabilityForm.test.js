@@ -31,9 +31,9 @@ describe("DriverAvailabilityForm tests", () => {
                 <DriverAvailabilityForm initialContents={driverFixtures.oneDriver} />
             </Router>
         );
-        expect(screen.getByText(/driverId/)).toBeInTheDocument();
-        await screen.findByTestId(/DriverAvailabilityForm-driverId/);
-        expect(screen.getByTestId(/DriverAvailabilityForm-driverId/)).toHaveValue("ISOXO");
+        expect(screen.getByText(/id/)).toBeInTheDocument();
+        await screen.findByTestId(/DriverAvailabilityForm-id/);
+        expect(screen.getByTestId(/DriverAvailabilityForm-id/)).toHaveValue("123");
     });
 
 
@@ -45,12 +45,14 @@ describe("DriverAvailabilityForm tests", () => {
             </Router>
         );
         await screen.findByTestId("DriverAvailabilityForm-day");
+        const driverIdField = screen.getByTestId("DriverAvailabilityForm-driverId");
         const dayField = screen.getByTestId("DriverAvailabilityForm-day");
         const startField = screen.getByTestId("DriverAvailabilityForm-start");
         const endField = screen.getByTestId("DriverAvailabilityForm-end");
         const notesField = screen.getByTestId("DriverAvailabilityForm-notes");
         const submitButton = screen.getByTestId("DriverAvailabilityForm-submit");
 
+        fireEvent.change(driverIdField, { target: { value: 'bad-input' } });
         fireEvent.change(dayField, { target: { value: 'bad-input' } });
         fireEvent.change(startField, { target: { value: 'bad-input' } });
         fireEvent.change(endField,{ target: { value: 'bad-input' } });
@@ -72,7 +74,8 @@ describe("DriverAvailabilityForm tests", () => {
 
         fireEvent.click(submitButton);
         
-        await screen.findByText(/driverId is required./);
+        await screen.findByText(/id is required./);
+        expect(screen.getByText(/driverId is required./)).toBeInTheDocument();
         expect(screen.getByText(/day is required./)).toBeInTheDocument();
         expect(screen.getByText(/inactive is required./)).toBeInTheDocument();
         expect(screen.getByText(/start is required./)).toBeInTheDocument();
@@ -89,8 +92,9 @@ describe("DriverAvailabilityForm tests", () => {
                 <DriverAvailabilityForm submitAction={mockSubmitAction} />
             </Router>
         );
-        await screen.findByTestId("DriverAvailabilityForm-driverId");
+        await screen.findByTestId("DriverAvailabilityForm-id");
 
+        const idField = screen.getByTestId("DriverAvailabilityForm-id");
         const driverIdField = screen.getByTestId("DriverAvailabilityForm-driverId");
         const dayField = screen.getByTestId("DriverAvailabilityForm-day");
         const startField = screen.getByTestId("DriverAvailabilityForm-start");
@@ -98,6 +102,7 @@ describe("DriverAvailabilityForm tests", () => {
         const notesField = screen.getByTestId("DriverAvailabilityForm-notes");
         const submitButton = screen.getByTestId("DriverAvailabilityForm-submit");
 
+        fireEvent.change(idField, { target: { value: '123' } });
         fireEvent.change(driverIdField, { target: { value: 'ISOXO' } });
         fireEvent.change(dayField, { target: { value: '3/20' } });
         fireEvent.change(startField, { target: { value: '3/20' } });

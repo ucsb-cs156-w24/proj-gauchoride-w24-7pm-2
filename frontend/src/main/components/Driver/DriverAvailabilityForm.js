@@ -23,6 +23,22 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
         <Form onSubmit={handleSubmit(submitAction)}>
 
             <Form.Group className="mb-3" >
+                <Form.Label htmlFor="id">id</Form.Label>
+                <Form.Control
+                    data-testid={testidPrefix + "-id"}
+                    id="id"
+                    type="text"
+                    isInvalid={Boolean(errors.id)}
+                    {...register("id", {
+                        required: "id is required.",
+                    })}
+                />
+                <Form.Control.Feedback type="invalid">
+                    {errors.id?.message}
+                </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3" >
                 <Form.Label htmlFor="driverId">driverId</Form.Label>
                 <Form.Control
                     data-testdriverId={testdriverIdPrefix + "-driverId"}
