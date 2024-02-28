@@ -7,7 +7,7 @@ import {useCurrentUser} from 'main/utils/currentUser'
 // import { Link } from 'react-router-dom';
 import RiderApplicationTable from "main/components/RiderApplication/RiderApplicationTable";
 
-export default function RiderApplicationIndexPage() {
+export default function RiderApplicationIndexPageAdmin() {
 
    const currentUser = useCurrentUser();
     // Stryker disable all
@@ -28,7 +28,7 @@ export default function RiderApplicationIndexPage() {
    const { data: riderApplicationsAll, error: _error, status: _status } =
       useBackend(
             // Stryker disable all : hard to test for query caching
-            ["/api/rider"],
+            ["/api/rider/admin/all"],
             { method: "GET", url: "/api/rider/admin/all" },
             []
             // Stryker restore all 
@@ -37,7 +37,7 @@ export default function RiderApplicationIndexPage() {
    const { data: riderApplicationsPending, error: _error2, status: _status2 } =
       useBackend(
          // Stryker disable all : hard to test for query caching
-         ["/api/rider"],
+         ["/api/rider/admin/pending"],
          { method: "GET", url: "/api/rider/admin/pending" },
          []
          // Stryker restore all 
