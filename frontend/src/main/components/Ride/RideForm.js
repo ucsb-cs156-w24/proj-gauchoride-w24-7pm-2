@@ -1,6 +1,5 @@
-import React from 'react'
 import { Button, Form } from 'react-bootstrap';
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -66,14 +65,14 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="start">Start Time</Form.Label>
+                <Form.Label htmlFor="start">Pick Up Time</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-start"}
                     id="start"
                     type="text"
                     isInvalid={Boolean(errors.start)}
                     {...register("start", {
-                        required: "Start time is required.",
+                        required: "Pick Up time is required.",
                         pattern: {
                             value: /^(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)$/,
                             message: "Please enter time in the format HH:MM AM/PM (e.g., 3:30PM)."
@@ -89,14 +88,14 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="end">End Time</Form.Label>
+                <Form.Label htmlFor="end">Drop Off Time</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-end"}
                     id="end"
                     type="text"
                     isInvalid={Boolean(errors.start) }
                     {...register("end", {
-                        required: "End time is required.",
+                        required: "Drop Off time is required.",
                         pattern: {
                             value: /^(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)$/,
                             message: "Please enter time in the format HH:MM AM/PM (e.g., 3:30PM)."
