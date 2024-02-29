@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +20,15 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
    
     const testIdPrefix = "RideForm";
 
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
 
     return (
 
@@ -64,7 +74,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3" >
+            <Form.Group className="mb-3" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 <Form.Label htmlFor="start">Pick Up Time</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-start"}
@@ -85,7 +95,20 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 <Form.Control.Feedback type="invalid">
                     {errors.start?.message}
                 </Form.Control.Feedback>
+
+                {isHovered && (
+                    <div
+                        style={
+                            {
+                                position: 'absolute',
+                                top: '100%',
+                                left: '30px'
+                            }
+                        }> Hello World </div>
+                )}
+
             </Form.Group>
+
 
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="end">Drop Off Time</Form.Label>
