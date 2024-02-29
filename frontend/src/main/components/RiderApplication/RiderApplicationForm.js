@@ -2,11 +2,12 @@ import React from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
-// import { hasRole, useCurrentUser } from "main/utils/currentUser";
+import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 
-function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Apply", email, disableBool}) {
+function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Apply", email, disableBool })  {
     const navigate = useNavigate();
+    const { data: currentUser } = useCurrentUser();
     
     // Stryker disable all
     const {
@@ -62,7 +63,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("status")}
                         defaultValue={initialContents?.status}
-                        disabled={disableBool}
+                        disabled
                     />
                 </Form.Group>
             )}
@@ -75,7 +76,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                     type="text"
                     {...register("email")}
                     defaultValue={email}
-                    disabled={disableBool}
+                    disabled
                 />
             </Form.Group>
 
@@ -88,7 +89,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("created_date")}
                         defaultValue={initialContents?.created_date}
-                        disabled={disableBool}
+                        disabled
                     />
                 </Form.Group>
             )}
@@ -130,7 +131,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("notes")}
                         defaultValue={initialContents?.notes}
-                        disabled={disableBool}
+                        disabled={disableBool || (hasRole(currentUser, "ROLE_RIDER"))} //enabled if you're the admin and you're on edit, disabled if you're driver or you're on show
                     />
                 </Form.Group>
             )}
@@ -183,12 +184,15 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                 </Form.Control.Feedback>
             </Form.Group>
 
+            {
+            (buttonLabel !== "show") && 
             <Button
                 type="submit"
                 data-testid={testIdPrefix + "-submit"}
             >
                 {buttonLabel}
             </Button>
+            }
             
             <Button
                 variant="Secondary"
