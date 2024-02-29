@@ -20,14 +20,23 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
    
     const testIdPrefix = "RideForm";
 
-    const [isHovered, setIsHovered] = useState(false);
+    const [isHovered1, setIsHovered1] = useState(false);
+    const [isHovered2, setIsHovered2] = useState(false);
 
-    const handleMouseEnter = () => {
-        setIsHovered(true);
+    const handleMouseEnter1 = () => {
+        setIsHovered1(true);
     };
 
-    const handleMouseLeave = () => {
-        setIsHovered(false);
+    const handleMouseLeave1 = () => {
+        setIsHovered1(false);
+    };
+
+    const handleMouseEnter2 = () => {
+        setIsHovered2(true);
+    };
+
+    const handleMouseLeave2 = () => {
+        setIsHovered2(false);
     };
 
     return (
@@ -77,7 +86,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
             <Form.Group className="mb-3">
                 <Form.Label htmlFor="start">Pick Up Time</Form.Label>
                 <Form.Control
-                    onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+                    onMouseEnter={handleMouseEnter1} onMouseLeave={handleMouseLeave1}
                     data-testid={testIdPrefix + "-start"}
                     id="start"
                     type="text"
@@ -97,7 +106,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                     {errors.start?.message}
                 </Form.Control.Feedback>
 
-                {isHovered && (
+                {isHovered1 && (
                     <div
                         style={
                             {
@@ -107,7 +116,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                                 background: 'rgba(240,240,240,1)',
                                 padding: '5px',
                                 zIndex: '999',
-                                borderRadius: '6px'
+                                borderRadius: '6px',
                             }
                         }> This is when you would like to be picked up </div>
                 )}
@@ -118,7 +127,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
             <Form.Group className="mb-3">
                 <Form.Label htmlFor="end" >Drop Off Time</Form.Label>
                 <Form.Control
-                    onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+                    onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2}
                     data-testid={testIdPrefix + "-end"}
                     id="end"
                     type="text"
@@ -137,7 +146,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                     {errors.end?.message}
                 </Form.Control.Feedback>
 
-                {isHovered && (
+                {isHovered2 && (
                     <div
                         style={
                             {
