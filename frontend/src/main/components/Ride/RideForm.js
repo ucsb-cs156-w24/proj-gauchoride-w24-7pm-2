@@ -74,9 +74,10 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <Form.Group className="mb-3">
                 <Form.Label htmlFor="start">Pick Up Time</Form.Label>
                 <Form.Control
+                    onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
                     data-testid={testIdPrefix + "-start"}
                     id="start"
                     type="text"
@@ -101,18 +102,23 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                         style={
                             {
                                 position: 'absolute',
-                                top: '100%',
-                                left: '30px'
+                                left: '500px',
+                                top: '264px',
+                                background: 'rgba(240,240,240,1)',
+                                padding: '5px',
+                                zIndex: '999',
+                                borderRadius: '6px'
                             }
-                        }> Hello World </div>
+                        }> This is when you would like to be picked up </div>
                 )}
 
             </Form.Group>
 
 
-            <Form.Group className="mb-3" >
-                <Form.Label htmlFor="end">Drop Off Time</Form.Label>
+            <Form.Group className="mb-3">
+                <Form.Label htmlFor="end" >Drop Off Time</Form.Label>
                 <Form.Control
+                    onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
                     data-testid={testIdPrefix + "-end"}
                     id="end"
                     type="text"
@@ -130,6 +136,22 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 <Form.Control.Feedback type="invalid">
                     {errors.end?.message}
                 </Form.Control.Feedback>
+
+                {isHovered && (
+                    <div
+                        style={
+                            {
+                                position: 'absolute',
+                                left: '500px',
+                                top: '350px',
+                                background: 'rgba(240,240,240,1)',
+                                padding: '5px',
+                                zIndex: '999',
+                                borderRadius: '6px'
+                            }
+                        }> This is the latest you would like to arrive by </div>
+                )}
+
             </Form.Group>
             
             <Form.Group className="mb-3" >
@@ -148,6 +170,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                 <Form.Control.Feedback type="invalid">
                     {errors.pickupBuilding?.message}
                 </Form.Control.Feedback>
+
             </Form.Group>
 
             <Form.Group className="mb-3" >
