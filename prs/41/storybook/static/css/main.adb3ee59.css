@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+
+.toggle-admin.btn.btn-primary {
+   background-color: #5e92c9;
+   border-color: #007bff;
+   color: white;
+}
+
+.toggle-admin.btn.btn-primary:hover {
+   background-color: #527faf;
+   border-color: #007bff;
+   color: white;
+}
+
+.toggle-driver.btn.btn-primary {
+   background-color: #59bf71;
+   border-color: #28a745;
+   color: white;
+}
+
+.toggle-driver.btn.btn-primary:hover {
+   background-color: #469158;
+   border-color: #28a745;
+   color: white;
+}
+
+.toggle-rider.btn.btn-primary {
+   background-color: #aa5ec3;
+   border-color:#b235dc;
+   color: white;
+}
+
+.toggle-rider.btn.btn-primary:hover {
+   background-color: #814894;
+   border-color: #b235dc;
+   color: white;
+}
+
+/*# sourceMappingURL=main.adb3ee59.css.map*/
