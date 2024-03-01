@@ -118,7 +118,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                                 zIndex: '999',
                                 borderRadius: '6px',
                             }
-                        }> This is when you would like to be picked up </div>
+                        }>This is when you would like to be picked up</div>
                 )}
 
             </Form.Group>
@@ -158,7 +158,7 @@ function RideForm({ initialContents, submitAction, buttonLabel = "Create" }) {
                                 zIndex: '999',
                                 borderRadius: '6px'
                             }
-                        }> This is the latest you would like to arrive by </div>
+                        }>This is the latest you would like to arrive by</div>
                 )}
 
             </Form.Group>
