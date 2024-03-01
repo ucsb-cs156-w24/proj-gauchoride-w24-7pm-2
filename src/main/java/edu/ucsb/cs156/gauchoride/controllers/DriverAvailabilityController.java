@@ -1,10 +1,8 @@
 package edu.ucsb.cs156.gauchoride.controllers;
 
 import edu.ucsb.cs156.gauchoride.entities.DriverAvailability;
-import edu.ucsb.cs156.gauchoride.entities.Ride;
 import edu.ucsb.cs156.gauchoride.errors.EntityNotFoundException;
 import edu.ucsb.cs156.gauchoride.repositories.DriverAvailabilityRepository;
-import edu.ucsb.cs156.gauchoride.repositories.RideRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -12,7 +10,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder.SecretKeyReactiveJwtDecoderBuilder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,7 +68,7 @@ public class DriverAvailabilityController extends ApiController{
     @Operation(summary = "Create a new ride")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')")
     @PostMapping("/new")
-    public Ride postAvailability(
+    public DriverAvailability postAvailability(
         @Parameter(name="day", description="String, Day of the week ride is requested (Monday - Sunday) and allows Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday", 
                     example="Tuesday", required = true) 
         @RequestParam String day,
@@ -110,13 +107,9 @@ public class DriverAvailabilityController extends ApiController{
 
         DriverAvailability availability;
 
-        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
-            getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_DRIVER"))) {
-            availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())
-                .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));;
-        } else {
-            throw(new EntityNotFoundException(DriverAvailability.class, id));
-        }
+        availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())
+            .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));
+        
 
         driverAvailabilityRepository.delete(availability);
         return genericMessage("Availability with id %s deleted".formatted(id));
@@ -126,7 +119,7 @@ public class DriverAvailabilityController extends ApiController{
     @Operation(summary = "Edits an availability if owned by current user")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')")
     @PutMapping("")
-    public Ride updateAvailability(
+    public DriverAvailability updateAvailability(
             @Parameter(name="id", description="long, Id of the Availability to be edited", 
             required = true)
             @RequestParam Long id,
@@ -134,13 +127,8 @@ public class DriverAvailabilityController extends ApiController{
 
         DriverAvailability availability;
 
-        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
-            getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_DRIVER"))) {
-            availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())
-                .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));;
-        } else {
-            throw(new EntityNotFoundException(DriverAvailability.class, id));
-        }
+        availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())
+            .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));
 
         availability.setDay(incoming.getDay());
         availability.setStartTime(incoming.getStartTime());
