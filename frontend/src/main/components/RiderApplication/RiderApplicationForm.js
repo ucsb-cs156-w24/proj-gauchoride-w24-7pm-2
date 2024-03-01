@@ -26,7 +26,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
 
         <Form onSubmit={handleSubmit(submitAction)}>
 
-            {initialContents && (
+            {/* {initialContents && (
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="id">Application Id</Form.Label>
                     <Form.Control
@@ -38,18 +38,18 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         disabled={disableBool}
                     />
                 </Form.Group>
-            )}
+            )} */}
 
             {initialContents && (
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="userId">Applicant Id</Form.Label>
                     <Form.Control
-                        data-testid={testIdPrefix + "-userId"}
+                        data-testid={testIdPrefix + "-id"}
                         id="userId"
                         type="text"
                         {...register("userId")}
                         defaultValue={initialContents?.userId}
-                        disabled={disableBool}
+                        disabled
                     />
                 </Form.Group>
             )}
@@ -103,7 +103,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("updated_date")}
                         defaultValue={initialContents?.updated_date}
-                        disabled={disableBool}
+                        disabled
                     />
                 </Form.Group>
             )}
@@ -117,7 +117,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("cancelled_date")}
                         defaultValue={initialContents?.cancelled_date}
-                        disabled={disableBool}
+                        disabled
                     />
                 </Form.Group>
             )}
