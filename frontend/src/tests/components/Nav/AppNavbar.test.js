@@ -30,7 +30,10 @@ describe("AppNavbar tests", () => {
         expect(rideMenu).not.toBeInTheDocument();
 
         const adminMenu = queryByTestId("appnavbar-admin-dropdown");
-        expect(adminMenu).not.toBeInTheDocument();    
+        expect(adminMenu).not.toBeInTheDocument();
+
+        const driverMenu = queryByTestId("appnavbar-driver-dropdown");
+        expect(driverMenu).not.toBeInTheDocument();
     });
 
     test("renders correctly for regular logged in rider", async () => {
@@ -46,7 +49,9 @@ describe("AppNavbar tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());        
+        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());    
+        const driverMenu = screen.queryByTestId("appnavbar-driver-dropdown");
+        expect(driverMenu).not.toBeInTheDocument();    
 
     });
 
@@ -55,7 +60,7 @@ describe("AppNavbar tests", () => {
         const currentUser = currentUserFixtures.driverOnly;
         const doLogin = jest.fn();
 
-        const { getByText} = render(
+        const { getByText, getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} doLogin={doLogin} />
@@ -64,6 +69,8 @@ describe("AppNavbar tests", () => {
         );
 
         await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
+        const driverMenu = getByTestId("appnavbar-driver-dropdown");
+        expect(driverMenu).toBeInTheDocument();
     });
 
     test("renders correctly for admin user", async () => {
@@ -562,7 +569,25 @@ describe("AppNavbar tests", () => {
     test("Driver page link should appear for a user that is not a driver", async () => {
         const currentUser = currentUserFixtures.driverOnly;
         const doLogin = jest.fn();
+
+        const { getByText } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
+        const driverLink = screen.queryByTestId("appnavbar-driver");
+        expect(driverLink).toBeInTheDocument();      
+    });
         
+    test("renders RiderApplicationMember links correctly for member", async () => {
+
+        const currentUser = currentUserFixtures.memberOnly;
+        const doLogin = jest.fn();
+
         const { getByText } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
@@ -571,9 +596,8 @@ describe("AppNavbar tests", () => {
             </QueryClientProvider>
         );
         
-        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
-        const driverLink = screen.queryByTestId("appnavbar-driver");
-        expect(driverLink).toBeInTheDocument();      
+        await waitFor(() => expect(getByText("Welcome, Phill Conrad")).toBeInTheDocument());
+        await waitFor(() => expect(getByText("Apply to be a Rider")).toBeInTheDocument());        
     });
 
     test("renders chat link correctly for driver", async () => {
@@ -610,10 +634,13 @@ describe("AppNavbar tests", () => {
 
         await waitFor(() => expect(getByText("Welcome, Phill Conrad")).toBeInTheDocument());
         const chatMenu = getByTestId("appnavbar-chat-dropdown");
-        expect(chatMenu).toBeInTheDocument();        
+        expect(chatMenu).toBeInTheDocument();    
+        const applyMenu = screen.queryByText("Apply to be a Rider");
+        expect(applyMenu).toBeInTheDocument();      
     });
 
-    test("not render shift table links for regular user", async () => {
+
+    test("not render RiderApplicationMember links for regular user", async () => {
 
         const currentUser = currentUserFixtures.userOnly;
         const doLogin = jest.fn();
@@ -628,10 +655,12 @@ describe("AppNavbar tests", () => {
 
         await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
         const chatMenu = screen.queryByTestId("appnavbar-chat-dropdown");
-        expect(chatMenu).not.toBeInTheDocument();        
+        expect(chatMenu).not.toBeInTheDocument();  
+        const applyRiderMenu = screen.queryByText("Apply to be a Rider");
+        expect(applyRiderMenu).not.toBeInTheDocument();        
     });
 
-    test("Driver page link should not appear for a user that is not a driver", async () => {
+    test("Driver page link should not appear for a user that is not a participant", async () => {
         const currentUser = currentUserFixtures.userOnly;
         const doLogin = jest.fn();
 
@@ -646,8 +675,29 @@ describe("AppNavbar tests", () => {
         await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
         const driverLink = screen.queryByTestId("appnavbar-driver-link");
         expect(driverLink).not.toBeInTheDocument();      
+        
+        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
+        const applyMenu = screen.queryByText("Apply to be a Rider");
+        expect(applyMenu).not.toBeInTheDocument();      
     });
 
-});
+    test("Apply to be a Rider should only appear for a user that is not a rider and is a member", async () => {
+        const currentUser = currentUserFixtures.riderMember;
+        const doLogin = jest.fn();
 
+        const { getByText } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
+        const applyMenu = screen.queryByText("Apply to be a Rider");
+        expect(applyMenu).not.toBeInTheDocument();
+    });
+
+
+});
 
