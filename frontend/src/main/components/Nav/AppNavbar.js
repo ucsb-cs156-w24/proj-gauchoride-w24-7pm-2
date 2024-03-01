@@ -81,6 +81,13 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
               {
+                hasRole(currentUser, "ROLE_DRIVER") && (
+                  <NavDropdown title="Driver DashBoard" id="appnavbar-driver-dropdown" data-testid="appnavbar-driver-dropdown" >
+                  <NavDropdown.Item as={Link} to="/drivershifts">Dashboard</NavDropdown.Item>
+                </NavDropdown>
+                )
+              }
+              {
                 isParticipant(currentUser) && (
                   <NavDropdown title="Driver Dashboard" id="appnavbar-shift-dropdown" data-testid="appnavbar-shift-dropdown" >
                     <NavDropdown.Item data-testid="appnavbar-driverdashboard-dropdown-driverdashboard" as={Link} to="/driverdashboard/">Driver Dashboard</NavDropdown.Item>
@@ -110,10 +117,16 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
               {
-                hasRole(currentUser, "ROLE_DRIVER") && (
-                  <Nav.Link id ="appnavbar-driver-link" data-testid="appnavbar-driver" as={Link} to="/driver">Drivers Page</Nav.Link>
+                isParticipant(currentUser) && (
+                  <Nav.Link id ="appnavbar-driver-link" data-testid="appnavbar-driver" as={Link} to="/drivers/list">Drivers Page</Nav.Link>
                 )
               }
+              {
+                hasRole(currentUser, "ROLE_MEMBER") && (
+                  <Nav.Link as={Link} to="/apply/rider">Apply to be a Rider</Nav.Link>
+                )
+              }
+
             </Nav>
 
             <Nav className="ml-auto">
