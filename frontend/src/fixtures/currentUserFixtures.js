@@ -365,6 +365,19 @@ const currentUserFixtures = {
             ]
         },
     },
+    riderMember: {
+        loggedIn: true,
+        root: {
+            ...(apiCurrentUserFixtures.riderOnly),
+            rolesList: [
+                "SCOPE_openid",
+                "ROLE_RIDER",
+                "ROLE_MEMBER",
+                "SCOPE_https://www.googleapis.com/auth/userinfo.profile",
+                "SCOPE_https://www.googleapis.com/auth/userinfo.email",
+            ]
+        },
+    },
     memberOnly: {
         loggedIn: true,
         root: {
