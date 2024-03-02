@@ -63,7 +63,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("status")}
                         defaultValue={initialContents?.status}
-                        disabled
+                        disabled={disableBool || !(hasRole(currentUser, "ROLE_ADMIN"))} //enabled if you're the admin and you're on edit, disabled if you're driver or you're on show
                     />
                 </Form.Group>
             )}
@@ -131,7 +131,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("notes")}
                         defaultValue={initialContents?.notes}
-                        disabled={disableBool || (hasRole(currentUser, "ROLE_RIDER"))} //enabled if you're the admin and you're on edit, disabled if you're driver or you're on show
+                        disabled={disableBool || !(hasRole(currentUser, "ROLE_ADMIN"))} //enabled if you're the admin and you're on edit, disabled if you're driver or you're on show
                     />
                 </Form.Group>
             )}
