@@ -1,9 +1,9 @@
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import { rideFixtures } from "fixtures/rideFixtures";
 import RideTable from "main/components/Ride/RideTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import { currentUserFixtures } from "fixtures/currentUserFixtures";
 
 
 const mockedNavigate = jest.fn();
@@ -91,7 +91,7 @@ describe("RideTable tests", () => {
 
     );
 
-    const expectedHeaders = ['id','Day','Student','Driver', 'Course #', 'Start Time', 'End Time', 'Pick Up Building', 'Pick Up Room', 'Drop Off Building', 'Drop Off Room', 'Notes'];
+    const expectedHeaders = ['id','Day','Student','Driver', 'Course #', 'Pick Up Time', 'Drop Off Time', 'Pick Up Building', 'Pick Up Room', 'Drop Off Building', 'Drop Off Room', 'Notes'];
     const expectedFields = ['id', 'day', 'student', 'driver', 'course', 'startTime', 'endTime', 'pickupBuilding', 'pickupRoom', 'dropoffBuilding','dropoffRoom', 'notes'];
     const testId = "RideTable";
 
@@ -133,7 +133,7 @@ describe("RideTable tests", () => {
 
     );
 
-    const expectedHeaders = ['id','Day','Driver', 'Course #', 'Start Time', 'End Time', 'Pick Up Building', 'Pick Up Room', 'Drop Off Building', 'Drop Off Room', 'Notes'];
+    const expectedHeaders = ['id','Day','Driver', 'Course #', 'Pick Up Time', 'Drop Off Time', 'Pick Up Building', 'Pick Up Room', 'Drop Off Building', 'Drop Off Room', 'Notes'];
     const expectedFields = ['id', 'day',  'driver', 'course', 'startTime', 'endTime', 'pickupBuilding', 'pickupRoom', 'dropoffBuilding','dropoffRoom', 'notes'];
     const testId = "RideTable";
 
@@ -173,7 +173,7 @@ describe("RideTable tests", () => {
 
     );
 
-    const expectedHeaders = ['id','Day','Student', 'Course #', 'Start Time', 'End Time', 'Pick Up Building', 'Pick Up Room', 'Drop Off Building', 'Drop Off Room', 'Notes'];
+    const expectedHeaders = ['id','Day','Student', 'Course #', 'Pick Up Time', 'Drop Off Time', 'Pick Up Building', 'Pick Up Room', 'Drop Off Building', 'Drop Off Room', 'Notes'];
     const expectedFields = ['id', 'day', 'student', 'course', 'startTime', 'endTime', 'pickupBuilding', 'pickupRoom', 'dropoffBuilding','dropoffRoom', 'notes'];
     const testId = "RideTable";
 
