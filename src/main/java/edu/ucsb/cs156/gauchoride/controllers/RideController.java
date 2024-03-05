@@ -108,6 +108,7 @@ public class RideController extends ApiController {
         
         ride.setRiderId(getCurrentUser().getUser().getId());
         ride.setStudent(getCurrentUser().getUser().getFullName());
+        ride.setShiftId(0);
         ride.setDay(day);
         ride.setStartTime(startTime);
         ride.setEndTime(endTime);
@@ -176,6 +177,78 @@ public class RideController extends ApiController {
         ride.setDropoffRoom(incoming.getDropoffRoom());
         ride.setCourse(incoming.getCourse());
         ride.setNotes(incoming.getNotes());
+
+        rideRepository.save(ride);
+
+        return ride;
+    }
+
+    //NEW ENDPOINT: set shift driver for a ride
+    @Operation(summary = "Set a shift driver for a single ride, only if user's admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("")
+    public Ride setShift(
+            @Parameter(name="id", description="long, Id of the Ride to be edited", 
+            required = true)
+            @RequestParam Long id,
+            @RequestBody @Valid Ride incoming) {
+
+        Ride ride;
+
+        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            ride = rideRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Ride.class, id));;
+        } else {
+            ride = rideRepository.findByIdAndRiderId(id, getCurrentUser().getUser().getId())
+                .orElseThrow(() -> new EntityNotFoundException(Ride.class, id));
+        }
+
+        // ride.setDay(incoming.getDay());
+        // ride.setStartTime(incoming.getStartTime());
+        // ride.setEndTime(incoming.getEndTime());
+        // ride.setPickupBuilding(incoming.getPickupBuilding());
+        // ride.setPickupRoom(incoming.getPickupRoom());
+        // ride.setDropoffBuilding(incoming.getDropoffBuilding());
+        // ride.setDropoffRoom(incoming.getDropoffRoom());
+        // ride.setCourse(incoming.getCourse());
+        // ride.setNotes(incoming.getNotes());
+        ride.setShiftId(incoming.getShiftId());
+
+        rideRepository.save(ride);
+
+        return ride;
+    }
+
+    @Operation(summary = "Get all ride requests a driver is associated with, only if user's driver or admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')")
+    @GetMapping("")
+    public Ride getShifts(
+            @Parameter(name="id", description="long, Id of the Ride to be edited", 
+            required = true)
+            @RequestParam Long id,
+            @RequestBody @Valid Ride incoming) {
+
+        Ride ride;
+
+        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
+        getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_DRIVER"))) {
+        ride = rideRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Ride.class, id));;
+        } else {
+            ride = rideRepository.findByIdAndRiderId(id, getCurrentUser().getUser().getId())
+                .orElseThrow(() -> new EntityNotFoundException(Ride.class, id));
+        }
+
+        // ride.setDay(incoming.getDay());
+        // ride.setStartTime(incoming.getStartTime());
+        // ride.setEndTime(incoming.getEndTime());
+        // ride.setPickupBuilding(incoming.getPickupBuilding());
+        // ride.setPickupRoom(incoming.getPickupRoom());
+        // ride.setDropoffBuilding(incoming.getDropoffBuilding());
+        // ride.setDropoffRoom(incoming.getDropoffRoom());
+        // ride.setCourse(incoming.getCourse());
+        // ride.setNotes(incoming.getNotes());
+        ride.setShiftId(incoming.getShiftId());
 
         rideRepository.save(ride);
 
