@@ -16,6 +16,10 @@ export default function RideTable({
         navigate(`/ride/edit/${cell.row.values.id}`)
     }
 
+    const assignCallback = (cell) => {
+        navigate(`/ride/assigndriver/${cell.row.values.id}`)
+    }
+
     // Stryker disable all : hard to test for query caching
 
     const deleteMutation = useBackendMutation(
@@ -183,6 +187,7 @@ export default function RideTable({
 
     const buttonColumnsAdmin = [
         ...columns,
+        ButtonColumn("Assign", "primary", assignCallback, "RideTable"),
         ButtonColumn("Edit", "primary", editCallback, "RideTable"),
         ButtonColumn("Delete", "danger", deleteCallback, "RideTable")
     ]

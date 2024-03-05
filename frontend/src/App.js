@@ -8,6 +8,9 @@ import DriverListPage from "main/pages/DriverListPage";
 import RideRequestCreatePage from "main/pages/Ride/RideRequestCreatePage";
 import RideRequestEditPage from "main/pages/Ride/RideRequestEditPage";
 import RideRequestIndexPage from "main/pages/Ride/RideRequestIndexPage";
+import RideRequestAssignPage from "main/pages/Ride/RideRequestAssignPage";
+
+
 import ShiftPage from "main/pages/ShiftPage";
 import ChatPage from "main/pages/ChatPage";
 
@@ -57,6 +60,9 @@ function App() {
         }
         {
           (hasRole(currentUser, "ROLE_ADMIN") || hasRole(currentUser, "ROLE_RIDER")) && <Route exact path="/ride/edit/:id" element={<RideRequestEditPage />} />
+        }
+        {
+          (hasRole(currentUser, "ROLE_ADMIN")) && <Route exact path="/ride/assigndriver/:id" element={<RideRequestAssignPage />} />
         }
         {
           (hasRole(currentUser, "ROLE_ADMIN")  || hasRole(currentUser, "ROLE_RIDER") )&& <Route exact path="/driverInfo/:id" element={<DriverInfoPage />} />
