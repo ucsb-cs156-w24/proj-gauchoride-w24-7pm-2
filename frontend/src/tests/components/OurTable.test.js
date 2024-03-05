@@ -2,6 +2,9 @@ import { render, waitFor, fireEvent } from "@testing-library/react";
 import OurTable, {ButtonColumn} from "main/components/OurTable";
 
 describe("OurTable tests", () => {
+
+    
+
     const threeRows = [
         {
             col1: 'Hello',
@@ -28,8 +31,27 @@ describe("OurTable tests", () => {
             Header: 'Column 2',
             accessor: 'col2',
         },
-        ButtonColumn("Click", "primary", clickMeCallback, "testId"),
+        ButtonColumn("Click", "primary", clickMeCallback, "testId", "Click Here"),
     ];
+
+    // testid-header 
+    test("renders headers correctly", async () => {
+        const { getByTestId } = render(
+            <OurTable columns={columns} data={threeRows} testid={"sampleTestId"} />
+        );
+
+        await waitFor(() => expect(getByTestId("sampleTestId-header-col1")).toBeInTheDocument());
+        const col1Header = getByTestId("sampleTestId-header-col1");
+        expect(col1Header).toHaveTextContent('Column 1');
+
+
+        const col2Header = getByTestId("sampleTestId-header-col2");
+        expect(col2Header).toHaveTextContent('Column 2');
+
+        const ClickHeader = getByTestId("sampleTestId-header-Click");
+        expect(ClickHeader).toHaveTextContent("Click Here");
+    });
+
 
     test("renders an empty table without crashing", () => {
         render(
