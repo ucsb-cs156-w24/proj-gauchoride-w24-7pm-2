@@ -5,10 +5,10 @@ export function onPutSuccess(message) {
     toast(message);
 }
 
-export function cellToAxiosParamsCancelApplicationMember(cell) {
+export function cellToAxiosParamsDelete(cell) {
     return {
-        url: "/api/driverAvailibility/cancel",
-        method: "PUT",
+        url: "/api/driverAvailability",
+        method: "DELETE",
         params: {
             id: cell.row.values.id
         }

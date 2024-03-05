@@ -1,4 +1,4 @@
-import { onPutSuccess, cellToAxiosParamsCancelApplicationMember } from "main/utils/driverAvailibilityUtils";
+import { onPutSuccess, cellToAxiosParamsDelete } from "main/utils/driverAvailibilityUtils";
 import mockConsole from "jest-mock-console";
 
 const mockToast = jest.fn();
@@ -32,19 +32,19 @@ describe("DriverAvailibilityUtils", () => {
         });
 
     });
-    describe("cellToAxiosParamsCancelApplicationMember", () => {
+    describe("cellToAxiosParamsDelete", () => {
 
         test("It returns the correct params", () => {
             // arrange
             const cell = { row: { values: { id: 17 } } };
 
             // act
-            const result = cellToAxiosParamsCancelApplicationMember(cell);
+            const result = cellToAxiosParamsDelete(cell);
 
             // assert
             expect(result).toEqual({
-                url: "/api/driverAvailibility/cancel",
-                method: "PUT",
+                url: "/api/driverAvailability",
+                method: "DELETE",
                 params: { id: 17 }
             });
         });
