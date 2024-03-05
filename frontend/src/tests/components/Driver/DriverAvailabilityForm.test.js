@@ -16,7 +16,7 @@ jest.mock('react-router-dom', () => ({
 describe("DriverAvailabilityForm tests", () => {
     const queryClient = new QueryClient();
 
-    const expectedHeaders = ["driverId", "day", "start", "end", "notes"];
+    const expectedHeaders = ["Driver Id", "Day", "Start Date", "End Date", "Notes"];
     const testId = "DriverAvailabilityForm";
 
     test("renders correctly with no initialContents", async () => {
@@ -69,15 +69,15 @@ describe("DriverAvailabilityForm tests", () => {
             expect(header).toBeInTheDocument();
         });
         expect(await screen.findByTestId(`${testId}-driverId`)).toBeInTheDocument();
-        expect(screen.getByText(`driverId`)).toBeInTheDocument();
+        expect(screen.getByText(`Driver Id`)).toBeInTheDocument();
         expect(await screen.findByTestId(`${testId}-day`)).toBeInTheDocument();
-        expect(screen.getByText(`day`)).toBeInTheDocument();
+        expect(screen.getByText(`Day`)).toBeInTheDocument();
         expect(await screen.findByTestId(`${testId}-start`)).toBeInTheDocument();
-        expect(screen.getByText(`start`)).toBeInTheDocument();
+        expect(screen.getByText(`Start Date`)).toBeInTheDocument();
         expect(await screen.findByTestId(`${testId}-end`)).toBeInTheDocument();
-        expect(screen.getByText(`end`)).toBeInTheDocument();
+        expect(screen.getByText(`End Date`)).toBeInTheDocument();
         expect(await screen.findByTestId(`${testId}-notes`)).toBeInTheDocument();
-        expect(screen.getByText(`notes`)).toBeInTheDocument();
+        expect(screen.getByText(`Notes`)).toBeInTheDocument();
     });
 
     test("Correct Errors on bad input", async () => {

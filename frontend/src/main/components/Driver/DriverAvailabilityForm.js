@@ -19,7 +19,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
         <Form onSubmit={handleSubmit(submitAction)}>
             {initialContents && (
                 <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="id">id</Form.Label>
+                    <Form.Label htmlFor="id">Id</Form.Label>
                     <Form.Control
                         data-testid={testIdPrefix + "-id"}
                         id="id"
@@ -31,7 +31,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
                 </Form.Group>
             )}
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="driverId">driverId</Form.Label>
+                <Form.Label htmlFor="driverId">Driver Id</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-driverId"}
                     id="driverId"
@@ -47,7 +47,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="day">day</Form.Label>
+                <Form.Label htmlFor="day">Day</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-day"}
                     id="day"
@@ -63,7 +63,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="start">start</Form.Label>
+                <Form.Label htmlFor="start">Start Date</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-start"}
                     id="start"
@@ -79,7 +79,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="end">end</Form.Label>
+                <Form.Label htmlFor="end">End Date</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-end"}
                     id="end"
@@ -95,7 +95,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="notes">notes</Form.Label>
+                <Form.Label htmlFor="notes">Notes</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-notes"}
                     id="notes"
