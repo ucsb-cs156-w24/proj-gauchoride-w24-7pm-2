@@ -71,7 +71,7 @@ export default function RiderApplicationTable({
 
     const buttonColumnsMember = [
         ...defaultColumns,
-        ButtonColumn("Show", "primary", showCallback, "RiderApplicationTable"),
+        ButtonColumn("Show", "primary", showCallback, "RiderApplicationTable", "Show"),
         {
             Header: 'Edit',
             Cell: ({ cell }) => {
@@ -104,7 +104,7 @@ export default function RiderApplicationTable({
 
     const buttonColumnsAdmin = [
         ...defaultColumns,
-        ButtonColumn("Review", "primary", reviewCallback, "RiderApplicationTable")
+        ButtonColumn("Review", "primary", reviewCallback, "RiderApplicationTable", "Review")
 
     ];
 
