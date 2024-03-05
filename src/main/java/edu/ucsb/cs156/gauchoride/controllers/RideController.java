@@ -1,8 +1,11 @@
 package edu.ucsb.cs156.gauchoride.controllers;
 
 import edu.ucsb.cs156.gauchoride.entities.Ride;
+import edu.ucsb.cs156.gauchoride.entities.Shift;
 import edu.ucsb.cs156.gauchoride.errors.EntityNotFoundException;
 import edu.ucsb.cs156.gauchoride.repositories.RideRepository;
+import edu.ucsb.cs156.gauchoride.repositories.ShiftRepository;
+
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +35,7 @@ public class RideController extends ApiController {
 
     @Autowired
     RideRepository rideRepository;
+    ShiftRepository shiftRepository;
 
     @Operation(summary = "List all rides, only user's if not admin/driver")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER') || hasRole('ROLE_USER')")
@@ -222,21 +226,23 @@ public class RideController extends ApiController {
     @Operation(summary = "Get all ride requests a driver is associated with, only if user's driver or admin")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')")
     @GetMapping("")
-    public Ride getShifts(
-            @Parameter(name="id", description="long, Id of the Ride to be edited", 
+    public Shift getShifts(
+            @Parameter(name="driverID", description="long, ID of the driver", 
             required = true)
-            @RequestParam Long id,
+            @RequestParam Long driverID,
             @RequestBody @Valid Ride incoming) {
 
-        Ride ride;
+        Shift driver;
 
         if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
         getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_DRIVER"))) {
-        ride = rideRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(Ride.class, id));;
+        driver = shiftRepository.findByDriverID(driverID)
+        //TODO: work on kinks here
+        // ride = rideRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Shift.class, driverID));;
         } else {
-            ride = rideRepository.findByIdAndRiderId(id, getCurrentUser().getUser().getId())
-                .orElseThrow(() -> new EntityNotFoundException(Ride.class, id));
+            driver = shiftRepository.findByDriverID(driverID, getCurrentUser().getUser().getId())
+                .orElseThrow(() -> new EntityNotFoundException(shift.class, id));
         }
 
         // ride.setDay(incoming.getDay());

@@ -24,6 +24,7 @@ public class Ride {
   private long id;
 
   private long riderId;
+  private long shiftId;
   private String student;
 
   @Schema(allowableValues = "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday")
