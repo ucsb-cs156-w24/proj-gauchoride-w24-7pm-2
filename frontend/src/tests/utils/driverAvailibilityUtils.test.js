@@ -1,4 +1,4 @@
-import { onPutSuccess, cellToAxiosParamsDelete } from "main/utils/driverAvailibilityUtils";
+import { onDeleteSuccess, cellToAxiosParamsDelete } from "main/utils/driverAvailibilityUtils";
 import mockConsole from "jest-mock-console";
 
 const mockToast = jest.fn();
@@ -13,14 +13,14 @@ jest.mock('react-toastify', () => {
 
 describe("DriverAvailibilityUtils", () => {
 
-    describe("onPutSuccess", () => {
+    describe("onDeleteSuccess", () => {
 
         test("It puts the message on console.log and in a toast", () => {
             // arrange
             const restoreConsole = mockConsole();
 
             // act
-            onPutSuccess("abc");
+            onDeleteSuccess("abc");
 
             // assert
             expect(mockToast).toHaveBeenCalledWith("abc");
