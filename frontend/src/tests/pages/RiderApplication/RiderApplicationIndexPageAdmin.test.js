@@ -121,6 +121,7 @@ describe("RiderApplicationIndexPageAdmin tests", () => {
         await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2"); });
         expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
         expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("4");
+        expect(screen.getByTestId(`${testId}-cell-row-0-col-Review-button`)).toHaveTextContent("Review");
 
     });
 
@@ -147,77 +148,5 @@ describe("RiderApplicationIndexPageAdmin tests", () => {
         expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
     });
 
-    // test("what happens when you click cancel and ok, member", async () => {
-    //     setupMemberOnly();
-
-    //     const queryClient = new QueryClient();
-    //     axiosMock.onGet("/api/rider").reply(200, applications);
-    //     axiosMock.onPut("/api/riderApplication/cancel").reply(200, "Application with id 4 is deleted");
-
-    //     // Spy on window.confirm
-    //     const mockConfirm = jest.spyOn(window, "confirm");
-    //     mockConfirm.mockReturnValue(true);
-
-    //     render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <RiderApplicationIndexPageAdmin />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
-
-    //     await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toBeInTheDocument(); });
-
-    //     expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("4");
-
-
-    //     await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-2-col-Cancel-button`)).toBeInTheDocument(); });
-
-
-    //     const cancelButton = screen.getByTestId(`${testId}-cell-row-2-col-Cancel-button`)
-    //     expect(cancelButton.classList.contains('btn-danger'));
-    //     fireEvent.click(cancelButton);
-
-    //     expect(mockConfirm).toHaveBeenCalledWith("Are you sure you want to cancel this application?\n\nClick 'OK' to confirm or 'Cancel' to keep your application active.");
-
-    //     await waitFor(() => { expect(mockToast).toBeCalledWith("Application with id 4 is deleted") });
-    // });
-
-    // test("what happens when you click cancel and no, member", async () => {
-    //     setupMemberOnly();
-
-    //     const queryClient = new QueryClient();
-    //     axiosMock.onGet("/api/rider").reply(200, applications);
-    //     axiosMock.onPut("/api/riderApplication/cancel").reply(200);
-
-    //     // Spy on window.confirm
-    //     const mockConfirm = jest.spyOn(window, "confirm");
-    //     mockConfirm.mockReturnValue(false);
-
-
-    //     render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <RiderApplicationIndexPageAdmin />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
-
-    //     await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toBeInTheDocument(); });
-
-    //     expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("4");
-
-
-    //     const cancelButton = screen.getByTestId(`${testId}-cell-row-2-col-Cancel-button`)
-    //     expect(cancelButton.classList.contains('btn-danger'));
-    //     fireEvent.click(cancelButton);
-
-    //     expect(mockConfirm).toHaveBeenCalledWith("Are you sure you want to cancel this application?\n\nClick 'OK' to confirm or 'Cancel' to keep your application active.");
-
-    //     await waitFor(() => {
-    //         expect(screen.getByTestId(`${testId}-cell-row-2-col-status`)).toHaveTextContent("pending");
-    //     })
-
-    // });
 
 });
