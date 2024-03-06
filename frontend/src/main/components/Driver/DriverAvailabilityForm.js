@@ -3,8 +3,6 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 
 function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "Create" }) {
-
-    
     // Stryker disable all
     const {
         register,
@@ -14,37 +12,31 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
         { defaultValues: initialContents || {}, }
     );
     // Stryker restore all
-   
     const navigate = useNavigate();
 
     const testIdPrefix = "DriverAvailabilityForm";
-
     return (
         <Form onSubmit={handleSubmit(submitAction)}>
-
+            {initialContents && (
+                <Form.Group className="mb-3" >
+                    <Form.Label htmlFor="id">Id</Form.Label>
+                    <Form.Control
+                        data-testid={testIdPrefix + "-id"}
+                        id="id"
+                        type="text"
+                        {...register("id")}
+                        value={initialContents.id}
+                        disabled
+                    />
+                </Form.Group>
+            )}
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="id">id</Form.Label>
+                <Form.Label htmlFor="driverId">Driver Id</Form.Label>
                 <Form.Control
-                    data-testid={testidPrefix + "-id"}
-                    id="id"
+                    data-testid={testIdPrefix + "-driverId"}
+                    id="driverId"
                     type="text"
-                    isInvalid={Boolean(errors.id)}
-                    {...register("id", {
-                        required: "id is required.",
-                    })}
-                />
-                <Form.Control.Feedback type="invalid">
-                    {errors.id?.message}
-                </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group className="mb-3" >
-                <Form.Label htmlFor="driverId">driverId</Form.Label>
-                <Form.Control
-                    data-testdriverId={testdriverIdPrefix + "-driverId"}
-                    driverId="driverId"
-                    type="text"
-                    isInvaldriverId={Boolean(errors.driverId)}
+                    isInvalid={Boolean(errors.driverId)}
                     {...register("driverId", {
                         required: "driverId is required.",
                     })}
@@ -54,16 +46,15 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
                 </Form.Control.Feedback>
             </Form.Group>
 
-
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="day">day</Form.Label>
+                <Form.Label htmlFor="day">Day</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-day"}
                     id="day"
                     type="text"
                     isInvalid={Boolean(errors.day)}
                     {...register("day", {
-                        required: "day is required.",
+                        required: "day is required."
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -72,7 +63,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="start">start</Form.Label>
+                <Form.Label htmlFor="start">Start Date</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-start"}
                     id="start"
@@ -88,7 +79,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="end">end</Form.Label>
+                <Form.Label htmlFor="end">End Date</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-end"}
                     id="end"
@@ -104,7 +95,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="notes">end</Form.Label>
+                <Form.Label htmlFor="notes">Notes</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-notes"}
                     id="notes"
@@ -118,6 +109,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
                     {errors.notes?.message}
                 </Form.Control.Feedback>
             </Form.Group>
+
             <Button
                 type="submit"
                 data-testid={testIdPrefix + "-submit"}

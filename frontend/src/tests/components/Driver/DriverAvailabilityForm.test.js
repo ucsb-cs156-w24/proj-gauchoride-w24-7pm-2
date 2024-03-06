@@ -1,7 +1,10 @@
-import { render, waitFor, fireEvent, screen } from "@testing-library/react";
-import DriverAvailabilityForm from "main/components/Driver/DriverAvailabilityForm";
-import { driverFixtures } from "fixtures/driverFixtures";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
+
+import DriverAvailabilityForm from "main/components/Driver/DriverAvailabilityForm"
+import { driverAvailabilityFixtures } from 'fixtures/driverAvailabilityFixtures';
+
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const mockedNavigate = jest.fn();
 
@@ -10,56 +13,92 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-
 describe("DriverAvailabilityForm tests", () => {
+    const queryClient = new QueryClient();
 
-    test("renders correctly", async () => {
+    const expectedHeaders = ["Driver Id", "Day", "Start Date", "End Date", "Notes"];
+    const testId = "DriverAvailabilityForm";
 
+    test("renders correctly with no initialContents", async () => {
         render(
-            <Router  >
-                <DriverAvailabilityForm />
-            </Router>
+            <QueryClientProvider client={queryClient}>
+                <Router>
+                    <DriverAvailabilityForm />
+                </Router>
+            </QueryClientProvider>
         );
-        await screen.findByText(/Create/);
+
+        expect(await screen.findByText(/Create/)).toBeInTheDocument();
+
+        expectedHeaders.forEach((headerText) => {
+            const header = screen.getByText(headerText);
+            expect(header).toBeInTheDocument();
+        });
+
     });
 
-
-    test("renders correctly when passing in a Driver", async () => {
-
+    test("renders id field correctly with initialContents", async () => {
+        const initialContents = {
+            id: "123", driverId: "ISOXO", day: "Monday", start: "09:00PM",end: "10:00PM", notes: "Available"
+        };
+    
         render(
-            <Router  >
-                <DriverAvailabilityForm initialContents={driverFixtures.oneDriver} />
+            <Router>
+                <DriverAvailabilityForm initialContents={initialContents} />
             </Router>
         );
-        expect(screen.getByText(/id/)).toBeInTheDocument();
-        await screen.findByTestId(/DriverAvailabilityForm-id/);
-        expect(screen.getByTestId(/DriverAvailabilityForm-id/)).toHaveValue("123");
+        const idField = await screen.findByTestId("DriverAvailabilityForm-id");
+        expect(idField).toBeInTheDocument();
+        expect(idField).toBeDisabled();
+        expect(idField).toHaveValue(initialContents.id);
+    });
+    
+
+    test("renders correctly when passing in initialContents", async () => {
+        render(
+            <QueryClientProvider client={queryClient}>
+                <Router>
+                    <DriverAvailabilityForm initialContents={driverAvailabilityFixtures.oneAvailability} />
+                </Router>
+            </QueryClientProvider>
+        );
+
+        expect(await screen.findByText(/Create/)).toBeInTheDocument();
+        expectedHeaders.forEach((headerText) => {
+            const header = screen.getByText(headerText);
+            expect(header).toBeInTheDocument();
+        });
+        expect(await screen.findByTestId(`${testId}-driverId`)).toBeInTheDocument();
+        expect(screen.getByText(`Driver Id`)).toBeInTheDocument();
+        expect(await screen.findByTestId(`${testId}-day`)).toBeInTheDocument();
+        expect(screen.getByText(`Day`)).toBeInTheDocument();
+        expect(await screen.findByTestId(`${testId}-start`)).toBeInTheDocument();
+        expect(screen.getByText(`Start Date`)).toBeInTheDocument();
+        expect(await screen.findByTestId(`${testId}-end`)).toBeInTheDocument();
+        expect(screen.getByText(`End Date`)).toBeInTheDocument();
+        expect(await screen.findByTestId(`${testId}-notes`)).toBeInTheDocument();
+        expect(screen.getByText(`Notes`)).toBeInTheDocument();
     });
 
-
-    test("Correct Error messsages on bad input", async () => {
-
+    test("Correct Errors on bad input", async () => {
         render(
-            <Router  >
-                <DriverAvailabilityForm />
-            </Router>
+            <QueryClientProvider client={queryClient}>
+                <Router>
+                    <DriverAvailabilityForm />
+                </Router>
+            </QueryClientProvider>
         );
-        await screen.findByTestId("DriverAvailabilityForm-day");
-        const driverIdField = screen.getByTestId("DriverAvailabilityForm-driverId");
-        const dayField = screen.getByTestId("DriverAvailabilityForm-day");
-        const startField = screen.getByTestId("DriverAvailabilityForm-start");
-        const endField = screen.getByTestId("DriverAvailabilityForm-end");
-        const notesField = screen.getByTestId("DriverAvailabilityForm-notes");
-        const submitButton = screen.getByTestId("DriverAvailabilityForm-submit");
 
-        fireEvent.change(driverIdField, { target: { value: 'bad-input' } });
-        fireEvent.change(dayField, { target: { value: 'bad-input' } });
-        fireEvent.change(startField, { target: { value: 'bad-input' } });
-        fireEvent.change(endField,{ target: { value: 'bad-input' } });
-        fireEvent.change(notesField,{ target: { value: 'bad-input' } });
+        expect(await screen.findByText(/Create/)).toBeInTheDocument();
+        const submitButton = screen.getByText(/Create/);
         fireEvent.click(submitButton);
 
-        expect(screen.queryByText(/day must be a string/)).not.toBeInTheDocument();
+        await screen.findByText(/driverId is required./);
+        expect(screen.getByText(/day is required./)).toBeInTheDocument();
+        expect(screen.getByText(/start is required./)).toBeInTheDocument();
+        expect(screen.getByText(/end is required./)).toBeInTheDocument();
+        expect(screen.getByText(/notes is required./)).toBeInTheDocument();
+
     });
 
     test("Correct Error messsages on missing input", async () => {
@@ -74,11 +113,12 @@ describe("DriverAvailabilityForm tests", () => {
 
         fireEvent.click(submitButton);
         
-        await screen.findByText(/id is required./);
+        await screen.findByText(/Id is required./);
         expect(screen.getByText(/driverId is required./)).toBeInTheDocument();
         expect(screen.getByText(/day is required./)).toBeInTheDocument();
-        expect(screen.getByText(/inactive is required./)).toBeInTheDocument();
         expect(screen.getByText(/start is required./)).toBeInTheDocument();
+        expect(screen.getByText(/end is required./)).toBeInTheDocument();
+        expect(screen.getByText(/notes is required./)).toBeInTheDocument();
 
     });
 
@@ -92,9 +132,8 @@ describe("DriverAvailabilityForm tests", () => {
                 <DriverAvailabilityForm submitAction={mockSubmitAction} />
             </Router>
         );
-        await screen.findByTestId("DriverAvailabilityForm-id");
+        await screen.findByTestId("DriverAvailabilityForm-driverId");
 
-        const idField = screen.getByTestId("DriverAvailabilityForm-id");
         const driverIdField = screen.getByTestId("DriverAvailabilityForm-driverId");
         const dayField = screen.getByTestId("DriverAvailabilityForm-day");
         const startField = screen.getByTestId("DriverAvailabilityForm-start");
@@ -102,21 +141,23 @@ describe("DriverAvailabilityForm tests", () => {
         const notesField = screen.getByTestId("DriverAvailabilityForm-notes");
         const submitButton = screen.getByTestId("DriverAvailabilityForm-submit");
 
-        fireEvent.change(idField, { target: { value: '123' } });
-        fireEvent.change(driverIdField, { target: { value: 'ISOXO' } });
-        fireEvent.change(dayField, { target: { value: '3/20' } });
-        fireEvent.change(startField, { target: { value: '3/20' } });
-        fireEvent.change(endField, { target: { value: '3/21'} });
-        fireEvent.change(notesField, { target: { value: 'Will play music during ride' } });
+        fireEvent.change(driverIdField, { target: { value: 'test' } });
+        fireEvent.change(dayField, { target: { value: 'test' } });
+        fireEvent.change(startField, { target: { value: 'test' } });
+        fireEvent.change(endField, { target: { value: 'test' } });
+        fireEvent.change(notesField, { target: { value: 'test' } });
         fireEvent.click(submitButton);
 
         await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
-        expect(screen.queryByText(/day must be a string/)).not.toBeInTheDocument();
-        expect(screen.queryByText(/start must be a string/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/driverId is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/day is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/start is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/end is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/notes is required./)).not.toBeInTheDocument();
+
 
     });
-
 
     test("that navigate(-1) is called when Cancel is clicked", async () => {
 
@@ -134,5 +175,5 @@ describe("DriverAvailabilityForm tests", () => {
 
     });
 
-});
 
+});

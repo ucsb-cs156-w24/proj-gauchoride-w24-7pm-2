@@ -1,6 +1,6 @@
 import React from 'react';
 import DriverAvailabilityForm from "main/components/Driver/DriverAvailabilityForm"
-import { driverFixtures } from 'fixtures/driverFixtures';
+import { driverAvailabilityFixtures } from 'fixtures/driverAvailabilityFixtures';
 
 export default {
     title: 'components/Driver/DriverAvailabilityForm',
@@ -26,7 +26,7 @@ Create.args = {
 export const Update = Template.bind({});
 
 Update.args = {
-    initialContents: driverFixtures.oneDriver[0],
+    initialContents: driverAvailabilityFixtures.oneDriverAvailability[0],
     buttonLabel: "Update",
     submitAction: (data) => {
         console.log("Submit was clicked with data: ", data); 
