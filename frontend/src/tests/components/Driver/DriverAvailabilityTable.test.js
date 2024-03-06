@@ -168,6 +168,9 @@ describe("DriverAvailabilityTable tests", () => {
 
     const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`)).toHaveTextContent("Delete");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`)).toHaveTextContent("Edit");
+
 
     // act - click the delete button
     fireEvent.click(deleteButton);

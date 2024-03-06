@@ -95,7 +95,7 @@ export function ButtonColumn(label, variant, callback, testid, displayText) {
         data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
         className={cell.column.id} 
       >
-        {displayText}
+        {displayText || label}
       </Button>
     )
   }
