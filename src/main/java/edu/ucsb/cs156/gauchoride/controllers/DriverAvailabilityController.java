@@ -65,21 +65,21 @@ public class DriverAvailabilityController extends ApiController{
         return availability;
     }
 
-    @Operation(summary = "Create a new ride")
+    @Operation(summary = "Create a new driver availability")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')")
     @PostMapping("/new")
     public DriverAvailability postAvailability(
-        @Parameter(name="day", description="String, Day of the week ride is requested (Monday - Sunday) and allows Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday", 
+        @Parameter(name="day", description="String, Day of the week driver is available (Monday - Sunday) and allows Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday", 
                     example="Tuesday", required = true) 
         @RequestParam String day,
 
-        @Parameter(name="startTime", description="String, Time the ride starts HH:MM(A/P)M", example="12:30AM", required = true)
+        @Parameter(name="startTime", description="String, Time the availability starts HH:MM(A/P)M", example="12:30AM", required = true)
         @RequestParam String startTime,
 
-        @Parameter(name="endTime", description="String, Time the ride ends HH:MM(A/P)M", example="12:30AM", required = true)
+        @Parameter(name="endTime", description="String, Time the availability ends HH:MM(A/P)M", example="12:30AM", required = true)
         @RequestParam String endTime,
 
-         @Parameter(name="notes", description="String, Extra information", example="We have two people riding", required = true)
+         @Parameter(name="notes", description="String, Extra information", example="Have to stay near the city", required = true)
         @RequestParam String notes
         )
         {
@@ -97,7 +97,7 @@ public class DriverAvailabilityController extends ApiController{
         return savedAvailability;
     }
 
-    @Operation(summary = "Delete an availability if owned by current user")
+    @Operation(summary = "Delete an availability if admin or owned by current user")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')")
     @DeleteMapping("")
     public Object deleteAvailability(
@@ -107,16 +107,20 @@ public class DriverAvailabilityController extends ApiController{
 
         DriverAvailability availability;
 
-        availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())
-            .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));
-        
+        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            availability = driverAvailabilityRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));;
+        } else {
+            availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())
+                .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));
+        }
 
         driverAvailabilityRepository.delete(availability);
         return genericMessage("Availability with id %s deleted".formatted(id));
     }
 
 
-    @Operation(summary = "Edits an availability if owned by current user")
+    @Operation(summary = "Edits an availability if admin or owned by current user")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')")
     @PutMapping("")
     public DriverAvailability updateAvailability(
@@ -127,8 +131,13 @@ public class DriverAvailabilityController extends ApiController{
 
         DriverAvailability availability;
 
-        availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())
-            .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));
+        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            availability = driverAvailabilityRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));;
+        } else {
+            availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())
+                .orElseThrow(() -> new EntityNotFoundException(DriverAvailability.class, id));
+        }
 
         availability.setDay(incoming.getDay());
         availability.setStartTime(incoming.getStartTime());
