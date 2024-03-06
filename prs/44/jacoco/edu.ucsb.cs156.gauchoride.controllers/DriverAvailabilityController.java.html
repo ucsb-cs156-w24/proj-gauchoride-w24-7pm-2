@@ -65,21 +65,21 @@ import javax.validation.Valid;
 <span class="fc" id="L65">        return availability;</span>
     }
 
-    @Operation(summary = &quot;Create a new ride&quot;)
+    @Operation(summary = &quot;Create a new driver availability&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')&quot;)
     @PostMapping(&quot;/new&quot;)
     public DriverAvailability postAvailability(
-        @Parameter(name=&quot;day&quot;, description=&quot;String, Day of the week ride is requested (Monday - Sunday) and allows Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday&quot;, 
+        @Parameter(name=&quot;day&quot;, description=&quot;String, Day of the week driver is available (Monday - Sunday) and allows Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday&quot;, 
                     example=&quot;Tuesday&quot;, required = true) 
         @RequestParam String day,
 
-        @Parameter(name=&quot;startTime&quot;, description=&quot;String, Time the ride starts HH:MM(A/P)M&quot;, example=&quot;12:30AM&quot;, required = true)
+        @Parameter(name=&quot;startTime&quot;, description=&quot;String, Time the availability starts HH:MM(A/P)M&quot;, example=&quot;12:30AM&quot;, required = true)
         @RequestParam String startTime,
 
-        @Parameter(name=&quot;endTime&quot;, description=&quot;String, Time the ride ends HH:MM(A/P)M&quot;, example=&quot;12:30AM&quot;, required = true)
+        @Parameter(name=&quot;endTime&quot;, description=&quot;String, Time the availability ends HH:MM(A/P)M&quot;, example=&quot;12:30AM&quot;, required = true)
         @RequestParam String endTime,
 
-         @Parameter(name=&quot;notes&quot;, description=&quot;String, Extra information&quot;, example=&quot;We have two people riding&quot;, required = true)
+         @Parameter(name=&quot;notes&quot;, description=&quot;String, Extra information&quot;, example=&quot;Have to stay near the city&quot;, required = true)
         @RequestParam String notes
         )
         {
@@ -97,7 +97,7 @@ import javax.validation.Valid;
 <span class="fc" id="L97">        return savedAvailability;</span>
     }
 
-    @Operation(summary = &quot;Delete an availability if owned by current user&quot;)
+    @Operation(summary = &quot;Delete an availability if admin or owned by current user&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')&quot;)
     @DeleteMapping(&quot;&quot;)
     public Object deleteAvailability(
@@ -107,16 +107,20 @@ import javax.validation.Valid;
 
         DriverAvailability availability;
 
-<span class="fc" id="L110">        availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())</span>
-<span class="fc" id="L111">            .orElseThrow(() -&gt; new EntityNotFoundException(DriverAvailability.class, id));</span>
-        
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority(&quot;ROLE_ADMIN&quot;))) {</span>
+<span class="fc" id="L111">            availability = driverAvailabilityRepository.findById(id)</span>
+<span class="fc" id="L112">                .orElseThrow(() -&gt; new EntityNotFoundException(DriverAvailability.class, id));;</span>
+        } else {
+<span class="fc" id="L114">            availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())</span>
+<span class="fc" id="L115">                .orElseThrow(() -&gt; new EntityNotFoundException(DriverAvailability.class, id));</span>
+        }
 
-<span class="fc" id="L114">        driverAvailabilityRepository.delete(availability);</span>
-<span class="fc" id="L115">        return genericMessage(&quot;Availability with id %s deleted&quot;.formatted(id));</span>
+<span class="fc" id="L118">        driverAvailabilityRepository.delete(availability);</span>
+<span class="fc" id="L119">        return genericMessage(&quot;Availability with id %s deleted&quot;.formatted(id));</span>
     }
 
 
-    @Operation(summary = &quot;Edits an availability if owned by current user&quot;)
+    @Operation(summary = &quot;Edits an availability if admin or owned by current user&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')&quot;)
     @PutMapping(&quot;&quot;)
     public DriverAvailability updateAvailability(
@@ -127,17 +131,22 @@ import javax.validation.Valid;
 
         DriverAvailability availability;
 
-<span class="fc" id="L130">        availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())</span>
-<span class="fc" id="L131">            .orElseThrow(() -&gt; new EntityNotFoundException(DriverAvailability.class, id));</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority(&quot;ROLE_ADMIN&quot;))) {</span>
+<span class="fc" id="L135">            availability = driverAvailabilityRepository.findById(id)</span>
+<span class="fc" id="L136">                .orElseThrow(() -&gt; new EntityNotFoundException(DriverAvailability.class, id));;</span>
+        } else {
+<span class="fc" id="L138">            availability = driverAvailabilityRepository.findByIdAndDriverId(id, getCurrentUser().getUser().getId())</span>
+<span class="fc" id="L139">                .orElseThrow(() -&gt; new EntityNotFoundException(DriverAvailability.class, id));</span>
+        }
 
-<span class="fc" id="L133">        availability.setDay(incoming.getDay());</span>
-<span class="fc" id="L134">        availability.setStartTime(incoming.getStartTime());</span>
-<span class="fc" id="L135">        availability.setEndTime(incoming.getEndTime());</span>
-<span class="fc" id="L136">        availability.setNotes(incoming.getNotes());</span>
+<span class="fc" id="L142">        availability.setDay(incoming.getDay());</span>
+<span class="fc" id="L143">        availability.setStartTime(incoming.getStartTime());</span>
+<span class="fc" id="L144">        availability.setEndTime(incoming.getEndTime());</span>
+<span class="fc" id="L145">        availability.setNotes(incoming.getNotes());</span>
 
-<span class="fc" id="L138">        driverAvailabilityRepository.save(availability);</span>
+<span class="fc" id="L147">        driverAvailabilityRepository.save(availability);</span>
 
-<span class="fc" id="L140">        return availability;</span>
+<span class="fc" id="L149">        return availability;</span>
     }
 
 }
