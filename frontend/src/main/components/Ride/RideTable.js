@@ -1,9 +1,8 @@
-import React from "react";
 import OurTable, { ButtonColumn } from "main/components/OurTable";
-import { useBackendMutation } from "main/utils/useBackend";
-import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/rideUtils"
-import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
+import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/rideUtils";
+import { useBackendMutation } from "main/utils/useBackend";
+import { useNavigate } from "react-router-dom";
 
 export default function RideTable({
         ride,
@@ -51,11 +50,11 @@ export default function RideTable({
             accessor: 'course',
         },
         {
-            Header: 'Start Time',
+            Header: 'Pick Up Time',
             accessor: 'startTime',
         },
         {
-            Header: 'End Time',
+            Header: 'Drop Off Time',
             accessor: 'endTime',
         },
         {
@@ -98,11 +97,11 @@ export default function RideTable({
             accessor: 'course',
         },
         {
-            Header: 'Start Time',
+            Header: 'Pick Up Time',
             accessor: 'startTime',
         },
         {
-            Header: 'End Time',
+            Header: 'Drop Off Time',
             accessor: 'endTime',
         },
         {
@@ -145,11 +144,11 @@ export default function RideTable({
             accessor: 'course',
         },
         {
-            Header: 'Start Time',
+            Header: 'Pick Up Time',
             accessor: 'startTime',
         },
         {
-            Header: 'End Time',
+            Header: 'Drop Off Time',
             accessor: 'endTime',
         },
         {

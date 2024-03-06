@@ -1,6 +1,7 @@
 import React from "react";
 import { useTable, useSortBy } from 'react-table'
 import { Table, Button } from "react-bootstrap";
+import './OurTable.css'
 
 export default function OurTable({ columns, data, testid = "testid" }) {
 
@@ -83,17 +84,18 @@ export default function OurTable({ columns, data, testid = "testid" }) {
 //   ButtonColumn("Delete", "danger", deleteCallback)
 // ];
 
-export function ButtonColumn(label, variant, callback, testid) {
+export function ButtonColumn(label, variant, callback, testid, displayText) {
   const column = {
-    Header: label,
+    Header: displayText || label,
     id: label,
     Cell: ({ cell }) => (
       <Button
         variant={variant}
         onClick={() => callback(cell)}
         data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
+        className={cell.column.id} 
       >
-        {label}
+        {displayText || label}
       </Button>
     )
   }
