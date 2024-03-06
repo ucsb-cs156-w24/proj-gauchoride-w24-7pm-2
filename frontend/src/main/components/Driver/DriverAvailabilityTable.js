@@ -64,8 +64,8 @@ export default function DriverAvailabilityTable({ driverAvailabilities, currentU
     ];
 
     if (hasRole(currentUser, "ROLE_ADMIN")) {
-        columns.push(ButtonColumn("Edit", "primary", editCallback, "DriverAvailabilityTable"));
-        columns.push(ButtonColumn("Delete", "danger", deleteCallback, "DriverAvailabilityTable"));
+        columns.push(ButtonColumn("Edit", "primary", editCallback, "DriverAvailabilityTable", "Edit"));
+        columns.push(ButtonColumn("Delete", "danger", deleteCallback, "DriverAvailabilityTable", "Delete"));
     } 
 
     return <OurTable
