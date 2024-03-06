@@ -26,19 +26,19 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
 
         <Form onSubmit={handleSubmit(submitAction)}>
 
-            {/* {initialContents && (
+            {initialContents && (
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="id">Application Id</Form.Label>
                     <Form.Control
-                        data-testid={testIdPrefix + "-id"}
+                        data-testid={testIdPrefix + "-appid"}
                         id="id"
                         type="text"
                         {...register("id")}
                         defaultValue={initialContents?.id}
-                        disabled={disableBool}
+                        disabled
                     />
                 </Form.Group>
-            )} */}
+            )}
 
             {initialContents && (
                 <Form.Group className="mb-3" >

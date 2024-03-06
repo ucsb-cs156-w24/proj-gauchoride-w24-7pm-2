@@ -153,44 +153,7 @@ describe("RiderApplicationShowPage tests", () => {
             
         });
 
-        // //NEW TEST!
-        // test("if disableBool is true, there's only a cancel button and nothing else", async () => {
-
-        //     const { queryByText, getByTestId, findByTestId } = render(
-        //         <QueryClientProvider client={queryClient}>
-        //             <MemoryRouter>
-        //                 <RiderApplicationShowPageMember/>
-        //             </MemoryRouter>
-        //         </QueryClientProvider>
-        //     );
-
-        //     await findByTestId("RiderApplicationForm-id");
-
-        //     const statusField =getByTestId("RiderApplicationForm-status");
-        //     const permNumberField = getByTestId("RiderApplicationForm-perm_number");
-        //     const emailField =getByTestId("RiderApplicationForm-email");
-        //     const createdDateField =getByTestId("RiderApplicationForm-created_date");
-        //     const updatedDateField =getByTestId("RiderApplicationForm-updated_date");
-        //     const cancelledDateField =getByTestId("RiderApplicationForm-cancelled_date");
-        //     const descriptionField = getByTestId("RiderApplicationForm-description");
-        //     const notesField =getByTestId("RiderApplicationForm-notes");
-        //     const showButton = queryByText("show");
-        //     // const showButton = getByTestId("RiderApplicationForm-submit")
-
-        //     expect(statusField).toHaveValue("pending");
-        //     expect(permNumberField).toHaveValue("1234567");
-        //     expect(emailField).toHaveValue("random@example.org");
-        //     expect(createdDateField).toHaveValue("2023-04-17");
-        //     expect(updatedDateField).toHaveValue("2023-04-17");
-        //     expect(cancelledDateField).toHaveValue("");
-        //     expect(descriptionField).toHaveValue("");
-        //     expect(notesField).toHaveValue("");
-
-        //     expect(showButton).not.toBeInTheDocument();
-            
-        //     // const createButton = screen.getByText("Create");
-        //     // expect(showButton).toBeInTheDocument();
-        // });
+ 
     });
 });
 

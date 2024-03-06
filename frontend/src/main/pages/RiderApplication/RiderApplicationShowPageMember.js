@@ -23,38 +23,6 @@ export default function RiderApplicationShowPage() {
     );
 
 
-  // const objectToAxiosPutParams = (riderApplication) => ({
-  //   url: "/api/riderApplication",
-  //   method: "PUT",
-  //   params: {
-  //     id: riderApplication.id,
-  //   },
-  //   data: {
-  //       perm_number: riderApplication.perm_number,
-  //       description: riderApplication.description
-  //   }
-  // });
-
-  // const onSuccess = (riderApplication) => {
-  //   toast(`Application Updated - id: ${riderApplication.id}`);
-  // }
-
-  // const mutation = useBackendMutation(
-  //   objectToAxiosPutParams,
-  //   { onSuccess },
-  //   // Stryker disable next-line all : hard to set up test for caching
-  //   [`/api/riderApplication?id=${id}`]
-  // );
-
-  // const { isSuccess } = mutation
-
-  // const onSubmit = async (data) => {
-  //   mutation.mutate(data);
-  // }
-
-  // if (isSuccess) {
-  //   return <Navigate to="/apply/rider" />
-  // }
 
     return (
         <BasicLayout>
