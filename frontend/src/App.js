@@ -23,6 +23,8 @@ import RiderApplicationCreatePage from "main/pages/RiderApplication/RiderApplica
 import RiderApplicationEditPageMember from "main/pages/RiderApplication/RiderApplicationEditPageMember";
 import RiderApplicationIndexPageMember from "main/pages/RiderApplication/RiderApplicationIndexPageMember";
 
+import DriverAvailabilityIndexPage from "main/pages/Drivers/DriverAvailabilityIndexPage";
+
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -100,6 +102,9 @@ function App() {
         }
         {
           (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/apply/rider/edit/:id" element={<RiderApplicationEditPageMember />} />
+        }
+        {
+          (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/availability/" element={<DriverAvailabilityIndexPage />} />
         }
         <Route exact path="/privacy.html" />
         <Route exact path="/*" element={<PageNotFound />} />
