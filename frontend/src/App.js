@@ -19,11 +19,11 @@ import DriverPage from "main/pages/DriverPage";
 import DriverDashboardPage from "main/pages/Drivers/DriverDashboardPage";
 import DriverInfoPage from "main/pages/DriverInfoPage";
 
+import DriverAvailabilityIndexPage from "main/pages/Drivers/DriverAvailabilityIndexPage";
+
 import RiderApplicationCreatePage from "main/pages/RiderApplication/RiderApplicationCreatePage";
 import RiderApplicationEditPageMember from "main/pages/RiderApplication/RiderApplicationEditPageMember";
 import RiderApplicationIndexPageMember from "main/pages/RiderApplication/RiderApplicationIndexPageMember";
-
-import DriverAvailabilityIndexPage from "main/pages/Drivers/DriverAvailabilityIndexPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -86,6 +86,7 @@ function App() {
         {
           (hasRole(currentUser, "ROLE_DRIVER") ) && <Route exact path="/drivershifts" element={<DriverDashboardPage />} />
         }
+        {
           (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/apply/rider" element={<RiderApplicationIndexPageMember />} />
         }
         {
