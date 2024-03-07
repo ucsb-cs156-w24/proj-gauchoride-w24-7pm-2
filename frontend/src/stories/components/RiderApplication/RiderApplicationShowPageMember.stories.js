@@ -23,11 +23,22 @@ Default.parameters = {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
         rest.get('/api/riderApplication', (_req, res, ctx) => {
-            return res(ctx.json(riderApplicationFixtures.threeRiderApplications[0]));
+            return res(ctx.json([]));
+        })
+    ]
+}
+
+export const oneRiderApplication = Template.bind({});
+oneRiderApplication.parameters = {
+    msw: [
+        rest.get('/api/currentUser', (_req, res, ctx) => {
+            return res(ctx.json(apiCurrentUserFixtures.userOnly));
         }),
-        // rest.get('/api/riderApplication/get', (req, res, ctx) => {
-        //     window.alert("GET: " + JSON.stringify(req.url));
-        //     return res(ctx.status(200),ctx.json({}));
-        // })
+        rest.get('/api/systemInfo', (_req, res, ctx) => {
+            return res(ctx.json(systemInfoFixtures.showingNeither));
+        }),
+        rest.get('/api/riderApplication', (_req, res, ctx) => {
+            return res(ctx.json(riderApplicationFixtures.oneRiderApplication[0]));
+        })
     ]
 }
