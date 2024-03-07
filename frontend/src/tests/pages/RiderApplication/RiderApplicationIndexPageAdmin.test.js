@@ -51,24 +51,6 @@ describe("RiderApplicationIndexPageAdmin tests", () => {
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
     };
 
-    // test("renders without crashing for regular user", () => {
-    //     setupMemberOnly();
-    //     const queryClient = new QueryClient();
-    //     axiosMock.onGet("/api/rider/admin/all").reply(200, []);
-
-    //     render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <RiderApplicationIndexPageAdmin />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
-
-    //     const createRideButton = screen.getByText("New Rider Application");
-    //     expect(createRideButton).toBeInTheDocument();
-    //     expect(createRideButton).toHaveAttribute("style", "float: right;");
-    // });
-
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
@@ -81,29 +63,8 @@ describe("RiderApplicationIndexPageAdmin tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>
         );
-        // const createRideButton = screen.getByText("New Rider Application");
-        // expect(createRideButton).toBeInTheDocument();
-        // expect(createRideButton).toHaveAttribute("style", "float: right;");
     });
 
-    // test("renders three rides without crashing for regular user", async () => {
-    //     setupMemberOnly();
-    //     const queryClient = new QueryClient();
-    //     axiosMock.onGet("/api/rider").reply(200, riderApplicationFixtures.threeRiderApplications);
-
-    //     render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <RiderApplicationIndexPageAdmin />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
-
-    //     await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2"); });
-    //     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    //     expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("4");
-
-    // });
 
     test("renders three rides without crashing for admin user", async () => {
         setupAdminUser();
