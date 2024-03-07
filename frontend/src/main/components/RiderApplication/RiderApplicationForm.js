@@ -53,7 +53,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                     />
                 </Form.Group>
             )}
-{/* 
+
             {initialContents && (
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="status">Status</Form.Label>
@@ -66,29 +66,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         disabled={disableBool || !(hasRole(currentUser, "ROLE_ADMIN"))} //enabled if you're the admin and you're on edit, disabled if you're driver or you're on show
                     />
                 </Form.Group>
-            )} */}
-            <Form.Group className="mb-3">
-                <Form.Label htmlFor="status">Status</Form.Label>
-                <Form.Control
-                    as="select"
-                    data-testid={testIdPrefix + "-status"}
-                    id="status"
-                    isInvalid={Boolean(errors.status)}
-                    {...register("status", { required: "Status is required." })}
-                    defaultValue={initialContents?.status}
-                    disabled={disableBool || !hasRole(currentUser, "ROLE_ADMIN")}
-                >
-                    <option value="">Select Status</option>
-                    <option value="pending">Pending</option>
-                    <option value="accepted">Accepted</option>
-                    <option value="declined">Declined</option>
-                    <option value="expired">Expired</option>
-                    <option value="cancelled">Cancelled</option>
-                </Form.Control>
-                <Form.Control.Feedback type="invalid">
-                    {errors.status?.message}
-                </Form.Control.Feedback>
-            </Form.Group>
+            )}
 
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="email">Email</Form.Label>
