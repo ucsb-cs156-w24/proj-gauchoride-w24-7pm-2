@@ -105,7 +105,7 @@ function App() {
           (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/apply/rider/edit/:id" element={<RiderApplicationEditPageMember />} />
         }
         {
-          (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/availability/" element={<DriverAvailabilityIndexPage />} />
+          (hasRole(currentUser, "ROLE_ADMIN") || hasRole(currentUser, "ROLE_DRIVER")) && <Route exact path="/availability/" element={<DriverAvailabilityIndexPage />} />
         }
         <Route exact path="/privacy.html" />
         <Route exact path="/*" element={<PageNotFound />} />
