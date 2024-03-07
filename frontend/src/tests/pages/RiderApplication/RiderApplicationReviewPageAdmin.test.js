@@ -76,17 +76,6 @@ describe("RiderApplicationReviewPage tests", () => {
          axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
          axiosMock.onGet("/api/rider/admin", { params: { id: 17 } }).reply(200, {
             id: 17,
-            perm_number: "1234567",
-            status: "pending",
-            email: "random@example.org",
-            created_date: "2023-04-17",
-            updated_date: "2023-04-17",
-            cancelled_date: "",
-            description: "",
-            notes: ""
-         });
-         axiosMock.onPut('/api/rider/admin').reply(200, {
-            id: 17,
             perm_number: "7654321",
             status: "pending",
             email: "random@example.org",
@@ -95,6 +84,17 @@ describe("RiderApplicationReviewPage tests", () => {
             cancelled_date: "",
             description: "My leg is broken",
             notes: ""
+         });
+         axiosMock.onPut('/api/rider/admin').reply(200, {
+            id: 17,
+            perm_number: "7654321",
+            status: "accepted",
+            email: "random@example.org",
+            created_date: "2023-04-17",
+            updated_date: "2023-08-25",
+            cancelled_date: "",
+            description: "My leg is broken",
+            notes: "notes inserted"
          });
       });
 
@@ -131,12 +131,12 @@ describe("RiderApplicationReviewPage tests", () => {
          const notesField = getByTestId("RiderApplicationForm-notes");
 
          expect(statusField).toHaveValue("pending");
-         expect(permNumberField).toHaveValue("1234567");
+         expect(permNumberField).toHaveValue("7654321");
          expect(emailField).toHaveValue("random@example.org");
          expect(createdDateField).toHaveValue("2023-04-17");
-         expect(updatedDateField).toHaveValue("2023-04-17");
+         expect(updatedDateField).toHaveValue("2023-08-25");
          expect(cancelledDateField).toHaveValue("");
-         expect(descriptionField).toHaveValue("");
+         expect(descriptionField).toHaveValue("My leg is broken");
          expect(notesField).toHaveValue("");
 
       });
@@ -164,12 +164,12 @@ describe("RiderApplicationReviewPage tests", () => {
          const submitButton = getByTestId("RiderApplicationForm-submit")
 
          expect(statusField).toHaveValue("pending");
-         expect(permNumberField).toHaveValue("1234567");
+         expect(permNumberField).toHaveValue("7654321");
          expect(emailField).toHaveValue("random@example.org");
          expect(createdDateField).toHaveValue("2023-04-17");
-         expect(updatedDateField).toHaveValue("2023-04-17");
+         expect(updatedDateField).toHaveValue("2023-08-25");
          expect(cancelledDateField).toHaveValue("");
-         expect(descriptionField).toHaveValue("");
+         expect(descriptionField).toHaveValue("My leg is broken");
          expect(notesField).toHaveValue("");
 
          expect(submitButton).toBeInTheDocument();
@@ -186,12 +186,10 @@ describe("RiderApplicationReviewPage tests", () => {
 
          expect(axiosMock.history.put.length).toBe(1); // times called
          expect(axiosMock.history.put[0].params).toEqual({
-            id: 17
-         }); 
-         expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
+            id: 17,
             notes: "notes inserted",
             status: "accepted"
-         })); // posted object        
+         });      
       });
    });
 });

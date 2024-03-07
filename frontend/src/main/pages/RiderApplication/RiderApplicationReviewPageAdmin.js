@@ -6,7 +6,7 @@ import { useBackend, useBackendMutation } from "main/utils/useBackend";
 
 import { toast } from "react-toastify";
 
-export default function RiderApplicationEditPage() {
+export default function RiderApplicationReviewPageAdmin() {
    let { id } = useParams();
 
    const { data: riderApplication, _error, _status } =
@@ -22,28 +22,17 @@ export default function RiderApplicationEditPage() {
          }
       );
 
-   const objectToAxiosPutParams = (riderApplication) => {
-      // Log the data property to the console
-      console.log('Data being sent:', {
-         status: riderApplication.status,
-         notes: riderApplication.notes,
-         id: riderApplication.id
-      });
+   const objectToAxiosPutParams = (riderApplication) => ({
 
-      return {
-         url: "/api/rider/admin",
-         method: "PUT",
-         params: {
-            id: riderApplication.id,
-            status: riderApplication.status,
-            notes: riderApplication.notes
-         },
-         data: {
-            status: riderApplication.status,
-            notes: riderApplication.notes
-         }
-      };
-   };
+      url: "/api/rider/admin",
+      method: "PUT",
+      params: {
+         id: riderApplication.id,
+         status: riderApplication.status,
+         notes: riderApplication.notes
+      }
+
+   });
 
 
    const onSuccess = (riderApplication) => {
