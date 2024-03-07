@@ -71,7 +71,7 @@ export default function RiderApplicationTable({
 
     const buttonColumnsMember = [
         ...defaultColumns,
-        ButtonColumn("Show", "primary", showCallback, "RiderApplicationTable", "Show"),
+        ButtonColumn("Show", "primary", showCallback, "RiderApplicationTable"),
         {
             Header: 'Edit',
             Cell: ({ cell }) => {
@@ -104,12 +104,9 @@ export default function RiderApplicationTable({
 
     const buttonColumnsAdmin = [
         ...defaultColumns,
-        ButtonColumn("Review", "primary", reviewCallback, "RiderApplicationTable", "Review")
+        ButtonColumn("Review", "primary", reviewCallback, "RiderApplicationTable")
 
     ];
-
-    console.log("Current user roles:", currentUser?.roles);
-    console.log("Is Admin:", hasRole(currentUser, "ROLE_ADMIN"));
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? buttonColumnsAdmin : buttonColumnsMember ;
     
