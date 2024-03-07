@@ -63,7 +63,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="start">Start Date</Form.Label>
+                <Form.Label htmlFor="start">Start Time</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-start"}
                     id="start"
@@ -79,7 +79,7 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="end">End Date</Form.Label>
+                <Form.Label htmlFor="end">End Time</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-end"}
                     id="end"

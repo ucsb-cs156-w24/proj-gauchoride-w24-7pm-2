@@ -28,7 +28,7 @@ export default function DriverAvailabilityTable({ driverAvailabilities, currentU
 
     const columns = [
         {
-            Header: 'Id',
+            Header: 'ID',
             accessor: 'id',
         },
         {
