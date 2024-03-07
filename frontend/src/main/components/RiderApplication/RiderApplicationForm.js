@@ -42,7 +42,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
 
             {initialContents && (
                 <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="userId">Applicant Id</Form.Label>
+                    <Form.Label htmlFor="userId">User Id</Form.Label>
                     <Form.Control
                         data-testid={testIdPrefix + "-id"}
                         id="userId"
