@@ -27,16 +27,3 @@ DriverAvailabilityThreeSubjectsNoButtons.args = {
     driverAvailabilities: driverAvailabilityFixtures.threeDriverAvailability,
     currentUser: currentUserFixtures.adminUser
 };
-
-
-// export const RiderThreeSubjectsWithButtons = Template.bind({});
-// RiderThreeSubjectsWithButtons.args = {
-//     ride: rideFixtures.threeRidesTable,
-//     currentUser: currentUserFixtures.userOnly
-// };
-
-// export const AdminThreeSubjectsWithButtons = Template.bind({});
-// AdminThreeSubjectsWithButtons.args = {
-//     ride: rideFixtures.threeRidesTable,
-//     currentUser: currentUserFixtures.adminUser
-// };
