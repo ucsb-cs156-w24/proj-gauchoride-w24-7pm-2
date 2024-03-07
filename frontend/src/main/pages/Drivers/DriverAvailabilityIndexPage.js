@@ -15,7 +15,7 @@ export default function DriverAvailabilityIndexPage() {
         useBackend(
             // Stryker disable all : hard to test for query caching
             ["/api/driverAvailability"],
-            { method: "GET", url: "/api/driverAvailability" },
+            { method: "GET", url: "/api/driverAvailability/all" },
             []
             // Stryker restore all 
     );  
