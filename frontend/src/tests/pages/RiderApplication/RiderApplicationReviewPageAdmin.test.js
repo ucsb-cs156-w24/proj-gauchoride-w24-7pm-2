@@ -151,7 +151,7 @@ describe("RiderApplicationReviewPage tests", () => {
             </QueryClientProvider>
          );
 
-         await findByTestId("RiderApplicationForm-id");
+         await findByTestId("RiderApplicationForm-appid");
 
          const statusField = getByTestId("RiderApplicationForm-status");
          const permNumberField = getByTestId("RiderApplicationForm-perm_number");
@@ -186,9 +186,12 @@ describe("RiderApplicationReviewPage tests", () => {
 
          expect(axiosMock.history.put.length).toBe(1); // times called
          expect(axiosMock.history.put[0].params).toEqual({
-            id: 17,notes: "notes inserted",
-            status: "accepted" });
-        
+            id: 17
+         }); 
+         expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
+            notes: "notes inserted",
+            status: "accepted"
+         })); // posted object        
       });
    });
 });
