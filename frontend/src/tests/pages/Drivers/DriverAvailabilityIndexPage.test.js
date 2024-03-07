@@ -184,7 +184,7 @@ describe("DriverAvailabilityIndexPage tests", () => {
     });
 
     test("what happens when you click delete, admin", async () => {
-        setupUserOnly();
+        setupAdminUser();
 
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/driverAvailability/all").reply(200, driverAvailabilityFixtures.threeDriverAvailability);
