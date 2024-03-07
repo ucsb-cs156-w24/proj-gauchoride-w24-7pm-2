@@ -14,23 +14,13 @@ export default function DriverAvailabilityTable({ driverAvailabilities, currentU
         navigate(`/availability/edit/${cell.row.values.id}`)
     }
 
-    // const deleteMutation = useBackendMutation(
-    //     cellToAxiosParamsDelete,
-    //     { onSuccess: onDeleteSuccess },
-    //     ["/api/driverAvailability/all"]
-    // );
-    
-    // const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
-
     // Stryker disable all : hard to test for query caching
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
         [],
     );
-    // Stryker restore all
 
-    // Stryker disable next-line all : TODO try to make a good test for this
     const deleteCallback = async (cell) => {
         deleteMutation.mutate(cell);
     };
