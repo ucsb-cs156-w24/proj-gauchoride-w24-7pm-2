@@ -61,7 +61,7 @@ export default function RiderApplicationEditPage() {
             <div className="pt-2">
                 <h1>Edit Rider Application</h1>
                 {riderApplication &&
-                <RiderApplicationForm initialContents={riderApplication} submitAction={onSubmit} buttonLabel="Edit" />
+                <RiderApplicationForm initialContents={riderApplication} submitAction={onSubmit} buttonLabel="Edit" disableBool={false} />
                 }
             </div>
         </BasicLayout>
