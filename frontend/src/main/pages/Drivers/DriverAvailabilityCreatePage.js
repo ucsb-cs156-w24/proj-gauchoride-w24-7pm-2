@@ -10,6 +10,7 @@ export default function DriverAvailabilityCreatePage() {
         url: "/api/driverAvailability/new",
         method: "POST",
         params: {
+            driverId: driverAvailability.driverId,
             day: driverAvailability.day,
             startTime: driverAvailability.start,
             endTime: driverAvailability.end,

@@ -55,6 +55,7 @@ describe("DriverAvailabilityCreatePage tests", () => {
         const queryClient = new QueryClient();
         const availability = {
             id: 17,
+            driverId: 5,
             day: "Monday",
             startTime: "12:00AM",
             endTime: "2:00AM", 
@@ -62,7 +63,7 @@ describe("DriverAvailabilityCreatePage tests", () => {
         };
 
         axiosMock.onPost("/api/driverAvailability/new").reply( 202, availability );
-
+        // const mockSubmitAction = jest.fn();
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
@@ -75,33 +76,42 @@ describe("DriverAvailabilityCreatePage tests", () => {
             expect(getByTestId("DriverAvailabilityForm-day")).toBeInTheDocument();
         });
 
+        const driverIdField = getByTestId("DriverAvailabilityForm-driverId");
         const dayField = getByTestId("DriverAvailabilityForm-day");
         const startTimeField = getByTestId("DriverAvailabilityForm-start");
         const endTimeField = getByTestId("DriverAvailabilityForm-end");
         const notesField = getByTestId("DriverAvailabilityForm-notes");
         const submitButton = getByTestId("DriverAvailabilityForm-submit");
+        expect(driverIdField).toBeInTheDocument();
+        expect(dayField).toBeInTheDocument();
+        expect(startTimeField).toBeInTheDocument();
+        expect(endTimeField).toBeInTheDocument();
+        expect(notesField).toBeInTheDocument();
 
         fireEvent.change(dayField, { target: { value: 'Monday' } });
+        fireEvent.change(driverIdField, { target: { value: 5 } });
         fireEvent.change(startTimeField, { target: { value: '12:00AM' } });
         fireEvent.change(endTimeField, { target: { value: '2:00AM' } });
         fireEvent.change(notesField, { target: { value: 'test' } });
-
 
         expect(submitButton).toBeInTheDocument();
 
         fireEvent.click(submitButton);
 
+        // await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
+
         await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
         expect(axiosMock.history.post[0].params).toEqual(
             {
+                "driverId": "5",
                 "day": "Monday",
                 "startTime": "12:00AM",
-                "endTime": "4:30PM", 
+                "endTime": "2:00AM", 
                 "notes" : "test"
         });
 
-        expect(mockToast).toBeCalledWith("New Ride Created - id: 17");
+        expect(mockToast).toBeCalledWith("New Driver Availability Created - id: 17");
         expect(mockNavigate).toBeCalledWith({ "to": "/availability/" });
     });
 
