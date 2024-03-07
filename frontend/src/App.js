@@ -24,7 +24,7 @@ import RiderApplicationShowPageMember from "main/pages/RiderApplication/RiderApp
 import RiderApplicationEditPageMember from "main/pages/RiderApplication/RiderApplicationEditPageMember";
 import RiderApplicationIndexPageMember from "main/pages/RiderApplication/RiderApplicationIndexPageMember";
 import RiderApplicationIndexPageAdmin from "main/pages/RiderApplication/RiderApplicationIndexPageAdmin";
-
+import RiderApplicationReviewPageAdmin from "main/pages/RiderApplication/RiderApplicationReviewPageAdmin";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -97,7 +97,7 @@ function App() {
           (hasRole(currentUser, "ROLE_ADMIN")) && <Route exact path="/admin/applications/riders" element={<RiderApplicationIndexPageAdmin />} />
         }
         {
-          (hasRole(currentUser, "ROLE_ADMIN")) && <Route exact path="/admin/applications/riders/review/:id" element={<RiderApplicationShowPageMember />} />
+          (hasRole(currentUser, "ROLE_ADMIN")) && <Route exact path="/admin/applications/riders/review/:id" element={<RiderApplicationReviewPageAdmin />} />
         }
         {
           (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/apply/rider/edit/:id" element={<RiderApplicationEditPageMember />} />
