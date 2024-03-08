@@ -117,8 +117,8 @@ describe("DriverAvailabilityEditPage tests", () => {
 
             const driverIdField = getByTestId("DriverAvailabilityForm-driverId");
             const dayField = getByTestId("DriverAvailabilityForm-day");
-            const startTimeField = getByTestId("DriverAvailabilityForm-start");
-            const endTimeField = getByTestId("DriverAvailabilityForm-end");
+            const startTimeField = getByTestId("DriverAvailabilityForm-startTime");
+            const endTimeField = getByTestId("DriverAvailabilityForm-endTime");
             const notesField = getByTestId("DriverAvailabilityForm-notes");
 
             expect(driverIdField).toHaveValue("1");
@@ -143,9 +143,11 @@ describe("DriverAvailabilityEditPage tests", () => {
 
             const driverIdField = getByTestId("DriverAvailabilityForm-driverId");
             const dayField = getByTestId("DriverAvailabilityForm-day");
-            const startTimeField = getByTestId("DriverAvailabilityForm-start");
-            const endTimeField = getByTestId("DriverAvailabilityForm-end");
+            const startTimeField = getByTestId("DriverAvailabilityForm-startTime");
+            const endTimeField = getByTestId("DriverAvailabilityForm-endTime");
             const notesField = getByTestId("DriverAvailabilityForm-notes");
+
+            const submitButton = getByTestId('DriverAvailabilityForm-submit')
 
             expect(driverIdField).toHaveValue("1");
             expect(dayField).toHaveValue("Monday");
