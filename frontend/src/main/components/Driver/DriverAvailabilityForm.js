@@ -63,12 +63,12 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="start">Start Date</Form.Label>
+                <Form.Label htmlFor="startTime">Start Time</Form.Label>
                 <Form.Control
-                    data-testid={testIdPrefix + "-start"}
+                    data-testid={testIdPrefix + "-startTime"}
                     id="start"
                     type="text"
-                    isInvalid={Boolean(errors.start)}
+                    isInvalid={Boolean(errors.startTime)}
                     {...register("start", {
                         required: "start is required."
                     })}
@@ -79,12 +79,12 @@ function DriverAvailabilityForm({ initialContents, submitAction, buttonLabel = "
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="end">End Date</Form.Label>
+                <Form.Label htmlFor="endTime">End Time</Form.Label>
                 <Form.Control
-                    data-testid={testIdPrefix + "-end"}
+                    data-testid={testIdPrefix + "-endTime"}
                     id="end"
                     type="text"
-                    isInvalid={Boolean(errors.end)}
+                    isInvalid={Boolean(errors.endTime)}
                     {...register("end", {
                         required: "end is required."
                     })}

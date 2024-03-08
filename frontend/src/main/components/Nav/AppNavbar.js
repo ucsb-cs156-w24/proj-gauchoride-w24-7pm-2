@@ -120,7 +120,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
               {
-                !hasRole(currentUser, "ROLE_DRIVER") && hasRole(currentUser, "ROLE_MEMBER") && (
+                hasRole(currentUser, "ROLE_DRIVER") && (
                   <Nav.Link as={Link} to="/availability">Driver Availabilities</Nav.Link>
                 )
               }
