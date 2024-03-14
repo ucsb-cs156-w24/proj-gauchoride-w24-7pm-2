@@ -49,10 +49,10 @@ import javax.validation.Valid;
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')&quot;)
     @GetMapping(&quot;&quot;)
     public DriverAvailability getById(
-            @Parameter(name=&quot;id&quot;, description = &quot;long, Id of the availability to get&quot;, 
-            required = true)  
-            @RequestParam Long id) {
-                DriverAvailability availability;
+        @Parameter(name=&quot;id&quot;, description = &quot;long, Id of the availability to get&quot;, 
+        required = true)  
+        @RequestParam Long id) {
+            DriverAvailability availability;
         
 <span class="fc bfc" id="L57" title="All 2 branches covered.">        if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority(&quot;ROLE_ADMIN&quot;))) {</span>
 <span class="fc" id="L58">            availability = driverAvailabilityRepository.findById(id)</span>
