@@ -698,6 +698,44 @@ describe("AppNavbar tests", () => {
         expect(applyMenu).not.toBeInTheDocument();
     });
 
+    test("Driver Availability page shouldn't appear for a non-driver", async () => {
+        const currentUser = currentUserFixtures.userOnly;
+        const doLogin = jest.fn();
+
+        const { getByText } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+        
+        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
+        const driverLink = screen.queryByTestId("appnavbar-driver-link");
+        expect(driverLink).not.toBeInTheDocument();      
+        
+        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
+        const applyMenu = screen.queryByText("Driver Availabilities");
+        expect(applyMenu).not.toBeInTheDocument();      
+    });
+
+    test("Driver Availability page should appear for a driver", async () => {
+        const currentUser = currentUserFixtures.driverOnly;
+        const doLogin = jest.fn();
+
+        const { getByText } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );   
+        
+        await waitFor(() => expect(getByText("Welcome, Phillip Conrad")).toBeInTheDocument());
+        const availabilitiesNav = screen.queryByText("Driver Availabilities");
+        expect(availabilitiesNav).toBeInTheDocument();      
+    });
+
 
 });
 
