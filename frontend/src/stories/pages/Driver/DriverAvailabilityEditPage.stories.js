@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DriverAvailabilityEditPage from 'main/pages/Drivers/DriverAvailabilityEditPage';
-import { fixtures } from 'fixtures/driverAvailabilityFixtures';
+import { driverAvailabilityFixtures } from 'fixtures/driverAvailabilityFixtures';
 
 export default {
     title: 'pages/Drivers/DriverAvailabilityEditPage',
@@ -13,7 +13,7 @@ const Template = () => <DriverAvailabilityEditPage />;
 export const Default = Template.bind({});
 
 Default.args = {
-    initialContents: fixtures.oneDriverAvailability
+    initialContents: driverAvailabilityFixtures.oneDriverAvailability
 };
 
 
