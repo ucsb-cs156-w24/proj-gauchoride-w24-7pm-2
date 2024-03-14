@@ -12,8 +12,8 @@ export default function DriverAvailabilityCreatePage() {
         params: {
             driverId: driverAvailability.driverId,
             day: driverAvailability.day,
-            startTime: driverAvailability.start,
-            endTime: driverAvailability.end,
+            startTime: driverAvailability.startTime,
+            endTime: driverAvailability.endTime,
             notes: driverAvailability.notes
         }
     });
