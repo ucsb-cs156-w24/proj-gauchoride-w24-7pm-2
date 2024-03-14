@@ -16,8 +16,8 @@ jest.mock('react-router-dom', () => ({
 describe("DriverAvailabilityTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Id", "Driver ID", "Day", "Start", "End", "Notes"];
-  const expectedFields = ["id", "driverId", "day", "start", "end", "notes"];
+  const expectedHeaders = ["ID", "Driver ID", "Day", "Start", "End", "Notes"];
+  const expectedFields = ["id", "driverId", "day", "startTime", "endTime", "notes"];
   const testId = "DriverAvailabilityTable";
 
   test("renders empty table correctly", () => {

@@ -16,7 +16,7 @@ jest.mock('react-router-dom', () => ({
 describe("DriverAvailabilityForm tests", () => {
     const queryClient = new QueryClient();
 
-    const expectedHeaders = ["Driver Id", "Day", "Start Date", "End Date", "Notes"];
+    const expectedHeaders = ["Driver Id", "Day", "Start Time", "End Time", "Notes"];
     const testId = "DriverAvailabilityForm";
 
     test("renders correctly with no initialContents", async () => {
@@ -39,7 +39,7 @@ describe("DriverAvailabilityForm tests", () => {
 
     test("renders id field correctly with initialContents", async () => {
         const initialContents = {
-            id: "123", driverId: "ISOXO", day: "Monday", start: "09:00PM",end: "10:00PM", notes: "Available"
+            id: "123", driverId: "ISOXO", day: "Monday", startTime: "09:00PM",endTime: "10:00PM", notes: "Available"
         };
     
         render(
@@ -72,10 +72,10 @@ describe("DriverAvailabilityForm tests", () => {
         expect(screen.getByText(`Driver Id`)).toBeInTheDocument();
         expect(await screen.findByTestId(`${testId}-day`)).toBeInTheDocument();
         expect(screen.getByText(`Day`)).toBeInTheDocument();
-        expect(await screen.findByTestId(`${testId}-start`)).toBeInTheDocument();
-        expect(screen.getByText(`Start Date`)).toBeInTheDocument();
-        expect(await screen.findByTestId(`${testId}-end`)).toBeInTheDocument();
-        expect(screen.getByText(`End Date`)).toBeInTheDocument();
+        expect(await screen.findByTestId(`${testId}-startTime`)).toBeInTheDocument();
+        expect(screen.getByText(`Start Time`)).toBeInTheDocument();
+        expect(await screen.findByTestId(`${testId}-endTime`)).toBeInTheDocument();
+        expect(screen.getByText(`End Time`)).toBeInTheDocument();
         expect(await screen.findByTestId(`${testId}-notes`)).toBeInTheDocument();
         expect(screen.getByText(`Notes`)).toBeInTheDocument();
     });
@@ -136,8 +136,8 @@ describe("DriverAvailabilityForm tests", () => {
 
         const driverIdField = screen.getByTestId("DriverAvailabilityForm-driverId");
         const dayField = screen.getByTestId("DriverAvailabilityForm-day");
-        const startField = screen.getByTestId("DriverAvailabilityForm-start");
-        const endField = screen.getByTestId("DriverAvailabilityForm-end");
+        const startField = screen.getByTestId("DriverAvailabilityForm-startTime");
+        const endField = screen.getByTestId("DriverAvailabilityForm-endTime");
         const notesField = screen.getByTestId("DriverAvailabilityForm-notes");
         const submitButton = screen.getByTestId("DriverAvailabilityForm-submit");
 

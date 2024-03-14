@@ -28,7 +28,7 @@ export default function DriverAvailabilityTable({ driverAvailabilities, currentU
 
     const columns = [
         {
-            Header: 'Id',
+            Header: 'ID',
             accessor: 'id',
         },
         {
@@ -41,11 +41,11 @@ export default function DriverAvailabilityTable({ driverAvailabilities, currentU
         },
         {
             Header: 'Start',
-            accessor: 'start',
+            accessor: 'startTime',
         },
         {
             Header: 'End',
-            accessor: 'end',
+            accessor: 'endTime',
         },
         {
             Header: 'Notes',

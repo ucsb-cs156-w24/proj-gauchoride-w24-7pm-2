@@ -19,6 +19,10 @@ import DriverPage from "main/pages/DriverPage";
 import DriverDashboardPage from "main/pages/Drivers/DriverDashboardPage";
 import DriverInfoPage from "main/pages/DriverInfoPage";
 
+import DriverAvailabilityIndexPage from "main/pages/Drivers/DriverAvailabilityIndexPage";
+import DriverAvailabilityCreatePage from "main/pages/Drivers/DriverAvailabilityCreatePage";
+import DriverAvailabilityEditPage from "main/pages/Drivers/DriverAvailabilityEditPage";
+
 import RiderApplicationCreatePage from "main/pages/RiderApplication/RiderApplicationCreatePage";
 import RiderApplicationShowPageMember from "main/pages/RiderApplication/RiderApplicationShowPageMember";
 import RiderApplicationEditPageMember from "main/pages/RiderApplication/RiderApplicationEditPageMember";
@@ -85,7 +89,7 @@ function App() {
           (hasRole(currentUser, "ROLE_DRIVER") ) && <Route exact path="/drivershifts" element={<DriverDashboardPage />} />
         }
         {
-          (hasRole(currentUser, "ROLE_MEMBER") ) && <Route exact path="/apply/rider" element={<RiderApplicationIndexPageMember />} />
+          (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/apply/rider" element={<RiderApplicationIndexPageMember />} />
         }
         {
           (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/apply/rider/new" element={<RiderApplicationCreatePage />} />
@@ -101,6 +105,15 @@ function App() {
         }
         {
           (hasRole(currentUser, "ROLE_MEMBER")) && <Route exact path="/apply/rider/edit/:id" element={<RiderApplicationEditPageMember />} />
+        }
+        {
+          (hasRole(currentUser, "ROLE_ADMIN") || hasRole(currentUser, "ROLE_DRIVER")) && <Route exact path="/availability/" element={<DriverAvailabilityIndexPage />} />
+        }
+        {
+          (hasRole(currentUser, "ROLE_ADMIN") || hasRole(currentUser, "ROLE_DRIVER")) && <Route exact path="/availability/create" element={<DriverAvailabilityCreatePage />} />
+        }
+        {
+          (hasRole(currentUser, "ROLE_ADMIN") || hasRole(currentUser, "ROLE_DRIVER")) && <Route exact path="/availability/edit/:id" element={<DriverAvailabilityEditPage />} />
         }
         <Route exact path="/privacy.html" />
         <Route exact path="/*" element={<PageNotFound />} />

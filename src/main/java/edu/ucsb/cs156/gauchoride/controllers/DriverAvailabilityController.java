@@ -49,10 +49,10 @@ public class DriverAvailabilityController extends ApiController{
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DRIVER')")
     @GetMapping("")
     public DriverAvailability getById(
-            @Parameter(name="id", description = "long, Id of the availability to get", 
-            required = true)  
-            @RequestParam Long id) {
-                DriverAvailability availability;
+        @Parameter(name="id", description = "long, Id of the availability to get", 
+        required = true)  
+        @RequestParam Long id) {
+            DriverAvailability availability;
         
         if (getCurrentUser().getRoles().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             availability = driverAvailabilityRepository.findById(id)
