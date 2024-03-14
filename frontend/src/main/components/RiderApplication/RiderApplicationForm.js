@@ -2,9 +2,12 @@ import React from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
+import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
-function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Apply", email}) {
+
+function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Apply", email, disableBool })  {
     const navigate = useNavigate();
+    const { data: currentUser } = useCurrentUser();
     
     // Stryker disable all
     const {
@@ -15,7 +18,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
         { defaultValues: initialContents }
     );
     // Stryker enable all
-   
+
     const testIdPrefix = "RiderApplicationForm";
 
 
@@ -27,7 +30,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="id">Application Id</Form.Label>
                     <Form.Control
-                        data-testid={testIdPrefix + "-id"}
+                        data-testid={testIdPrefix + "-appid"}
                         id="id"
                         type="text"
                         {...register("id")}
@@ -39,9 +42,9 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
 
             {initialContents && (
                 <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="userId">Applicant Id</Form.Label>
+                    <Form.Label htmlFor="userId">User Id</Form.Label>
                     <Form.Control
-                        data-testid={testIdPrefix + "-userId"}
+                        data-testid={testIdPrefix + "-id"}
                         id="userId"
                         type="text"
                         {...register("userId")}
@@ -60,7 +63,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("status")}
                         defaultValue={initialContents?.status}
-                        disabled
+                        disabled={disableBool || !(hasRole(currentUser, "ROLE_ADMIN"))} //enabled if you're the admin and you're on edit, disabled if you're driver or you're on show
                     />
                 </Form.Group>
             )}
@@ -90,7 +93,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                     />
                 </Form.Group>
             )}
-            
+
             {initialContents && (
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="updated_date">Date Updated</Form.Label>
@@ -128,7 +131,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                         type="text"
                         {...register("notes")}
                         defaultValue={initialContents?.notes}
-                        disabled
+                        disabled={disableBool || !(hasRole(currentUser, "ROLE_ADMIN"))} //enabled if you're the admin and you're on edit, disabled if you're driver or you're on show
                     />
                 </Form.Group>
             )}
@@ -153,6 +156,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                     })}
                     placeholder="e.g. 0000000"
                     defaultValue={initialContents?.perm_number}
+                    disabled={disableBool}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.perm_number?.message}
@@ -161,7 +165,7 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
 
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="description">Description</Form.Label>
-                <Form.Label style={{ display: 'block', fontSize: '80%', fontStyle: 'italic', color: '#888' }}>Please describe the mobility limitations that cause you to need to use the Gauchoride service.</Form.Label>                        
+                <Form.Label style={{ display: 'block', fontSize: '80%', fontStyle: 'italic', color: '#888' }}>Please describe the mobility limitations that cause you to need to use the Gauchoride service.</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-description"}
                     id="description"
@@ -170,21 +174,25 @@ function RiderApplicationForm({ initialContents, submitAction, buttonLabel = "Ap
                     {...register("description", {
                         required: "Description is required."
                     })}
-                    placeholder="e.g. My legs are broken."  
+                    placeholder="e.g. My legs are broken."
                     defaultValue={initialContents?.description}
                     style={{ width: '100%', minHeight: '10rem', resize: 'vertical', verticalAlign: 'top' }}
+                disabled={disableBool}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.description?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 
+            {
+            (buttonLabel !== "show") && 
             <Button
                 type="submit"
                 data-testid={testIdPrefix + "-submit"}
             >
                 {buttonLabel}
             </Button>
+            }
             
             <Button
                 variant="Secondary"

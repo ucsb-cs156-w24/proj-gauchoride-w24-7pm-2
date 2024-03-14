@@ -108,8 +108,8 @@ export default function RiderApplicationTable({
 
     ];
 
-    const columnsToDisplay = (hasRole(currentUser, "ROLE_ADMIN")) ? buttonColumnsAdmin : buttonColumnsMember;
-
+    const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? buttonColumnsAdmin : buttonColumnsMember ;
+    
     return <OurTable
         data={riderApplications}
         columns={columnsToDisplay}
